@@ -1,25 +1,26 @@
 package com.sparta.miniproject.comment;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.miniproject.common.dto.CodeResponseDto;
 import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
+import com.sparta.miniproject.tool.EnableJwtAuthorizationFilterTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.sparta.miniproject.tool.ProxyTestRequest.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @EnableGlobalExceptionControllerAdviceTest
+@EnableJwtAuthorizationFilterTest
 @WebMvcTest(CommentController.class)
 class CommentControllerTest {
     @Autowired
@@ -31,8 +32,7 @@ class CommentControllerTest {
     @InjectMocks
     private CommentController commentController;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
+    @WithMockUser
     @Test
     @DisplayName("[정상 작동] 댓글 생성")
     void create() throws Exception {
@@ -50,9 +50,7 @@ class CommentControllerTest {
 
         // when & then
         mvc.perform(
-                post(urlForTest)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request))
+                        postAsJson(urlForTest, request)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -61,6 +59,7 @@ class CommentControllerTest {
                 .andExpect(jsonPath("$.detailid").hasJsonPath());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("[정상 작동] 댓글 수정")
     void update() throws Exception {
@@ -79,9 +78,7 @@ class CommentControllerTest {
 
         // when & then
         mvc.perform(
-                patch(urlForTest)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request))
+                        patchAsJson(urlForTest, request)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -90,6 +87,7 @@ class CommentControllerTest {
                 .andExpect(jsonPath("$.detailid").hasJsonPath());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("[정상 작동] 댓글 삭제")
     void deleteMethod() throws Exception {
@@ -104,7 +102,7 @@ class CommentControllerTest {
         );
 
         // when & then
-        mvc.perform(delete(urlForTest))
+        mvc.perform(deleteWithCsrf(urlForTest))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").hasJsonPath());
