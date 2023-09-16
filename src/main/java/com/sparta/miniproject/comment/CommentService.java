@@ -3,8 +3,10 @@ package com.sparta.miniproject.comment;
 import com.sparta.miniproject.common.dto.CodeResponseDto;
 import com.sparta.miniproject.common.exception.JobException;
 import com.sparta.miniproject.common.exception.MessageSourceUtil;
+import com.sparta.miniproject.common.util.SecurityUtil;
 import com.sparta.miniproject.company.Company;
 import com.sparta.miniproject.company.CompanyRepository;
+import com.sparta.miniproject.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,8 @@ public class CommentService {
     public CommentResponseDto update(Long commentId, CommentUpdateRequestDto request) {
         Comment entity = findById(commentId);
 
+        isThisYours(entity.getMember());
+
         request.overwriteTo(entity);
         return CommentResponseDto.fromEntity(entity);
     }
@@ -41,6 +45,8 @@ public class CommentService {
     @Transactional
     public CodeResponseDto deleteById(Long commentId) {
         Comment entity = findById(commentId);
+
+        isThisYours(entity.getMember());
 
         commentRepository.delete(entity);
 
@@ -64,5 +70,22 @@ public class CommentService {
                         .msg("company.read.not_found")
                         .status(HttpStatus.BAD_REQUEST)
                         .build());
+    }
+
+    private static void isThisYours(Member memberWhoOwnedThis) {
+        Member memberLoggedIn = SecurityUtil.getMemberLoggedIn()
+                .orElseThrow(() ->
+                        JobException.builder()
+                                .msg("authentication.empty")
+                                .status(HttpStatus.UNAUTHORIZED)
+                                .build()
+                        );
+
+        if(!memberLoggedIn.getId().equals(memberWhoOwnedThis.getId())) {
+            throw JobException.builder()
+                    .msg("comment.access.denied")
+                    .status(HttpStatus.FORBIDDEN)
+                    .build();
+        }
     }
 }
