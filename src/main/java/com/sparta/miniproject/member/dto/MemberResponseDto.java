@@ -11,4 +11,3 @@ public class MemberResponseDto {
         this.msg = msg;
     }
 }
-

@@ -10,6 +10,6 @@ public class PasswordConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); //BCrypt 비밀번호를 암호화 해주는 Hash 함수
+        return new BCryptPasswordEncoder();
     }
 }
