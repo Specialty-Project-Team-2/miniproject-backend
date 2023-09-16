@@ -1,7 +1,6 @@
 package com.sparta.miniproject.common.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.miniproject.common.dto.CodeResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     ) throws IOException {
         String message = source.interpretErrorMessage("access.denied");
 
-        CodeResponseDto responseDto = CodeResponseDto.builder()
+        ErrorResponseDto responseDto = ErrorResponseDto.builder()
                 .msg(message)
                 .build();
 

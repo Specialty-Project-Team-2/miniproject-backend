@@ -1,8 +1,6 @@
 package com.sparta.miniproject.common.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.miniproject.common.dto.CodeResponseDto;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +28,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     ) throws IOException {
         String message = source.interpretErrorMessage("authentication.empty");
 
-        CodeResponseDto responseDto = CodeResponseDto.builder()
+        ErrorResponseDto responseDto = ErrorResponseDto.builder()
                 .msg(message)
                 .build();
 
