@@ -3,11 +3,13 @@ package com.sparta.miniproject.member.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
-@Table(name = "membar")
+@Table(name = "member")
 public class Member {
 
     @Id

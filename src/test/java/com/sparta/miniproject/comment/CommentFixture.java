@@ -1,7 +1,7 @@
 package com.sparta.miniproject.comment;
 
 import com.sparta.miniproject.company.Company;
-import com.sparta.miniproject.member.Member;
+import com.sparta.miniproject.member.entity.Member;
 
 public class CommentFixture {
     public static Comment case1(Company company, Member member) {
