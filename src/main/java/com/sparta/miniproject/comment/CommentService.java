@@ -6,7 +6,7 @@ import com.sparta.miniproject.common.exception.MessageSourceUtil;
 import com.sparta.miniproject.common.util.SecurityUtil;
 import com.sparta.miniproject.company.Company;
 import com.sparta.miniproject.company.CompanyRepository;
-import com.sparta.miniproject.member.Member;
+import com.sparta.miniproject.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -81,7 +81,7 @@ public class CommentService {
                                 .build()
                         );
 
-        if(!memberLoggedIn.getId().equals(memberWhoOwnedThis.getId())) {
+        if(!(memberLoggedIn.getId() == memberWhoOwnedThis.getId())) {
             throw JobException.builder()
                     .msg("comment.access.denied")
                     .status(HttpStatus.FORBIDDEN)

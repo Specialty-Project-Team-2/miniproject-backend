@@ -1,7 +1,7 @@
 package com.sparta.miniproject.common.util;
 
 import com.sparta.miniproject.common.security.UserDetailsImpl;
-import com.sparta.miniproject.member.Member;
+import com.sparta.miniproject.member.entity.Member;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;

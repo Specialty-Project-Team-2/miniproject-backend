@@ -1,5 +1,7 @@
 package com.sparta.miniproject.common.filter;
 
+import com.sparta.miniproject.common.jwtutil.JwtUtil;
+import com.sparta.miniproject.member.repository.MemberRepository;
 import com.sparta.miniproject.tool.ApplicationContextSupplier;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,9 +10,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -19,6 +24,11 @@ import static org.mockito.Mockito.when;
 @Slf4j
 @ApplicationContextSupplier
 @Import(JwtAuthorizationFilter.class)
+@MockBeans({
+        @MockBean(JwtUtil.class),
+        @MockBean(UserDetailsService.class),
+        @MockBean(MemberRepository.class)
+})
 class JwtAuthorizationFilterTest {
     @Autowired
     private JwtAuthorizationFilter jwtAuthorizationFilter;

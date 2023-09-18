@@ -1,6 +1,6 @@
 package com.sparta.miniproject.common.security;
 
-import com.sparta.miniproject.member.Member;
+import com.sparta.miniproject.member.entity.Member;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

@@ -2,7 +2,7 @@ package com.sparta.miniproject.comment;
 
 
 import com.sparta.miniproject.company.Company;
-import com.sparta.miniproject.member.Member;
+import com.sparta.miniproject.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

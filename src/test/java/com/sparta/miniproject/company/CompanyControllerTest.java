@@ -1,14 +1,17 @@
 package com.sparta.miniproject.company;
 
 import com.sparta.miniproject.common.exception.JobException;
+import com.sparta.miniproject.common.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.member.filter.LoginFilter;
 import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
-import com.sparta.miniproject.tool.EnableJwtAuthorizationFilterTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,8 +24,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @EnableGlobalExceptionControllerAdviceTest
-@EnableJwtAuthorizationFilterTest
-@WebMvcTest(CompanyController.class)
+@WebMvcTest(
+        controllers = CompanyController.class,
+        excludeFilters = {
+                @ComponentScan.Filter(
+                        type = FilterType.ASSIGNABLE_TYPE,
+                        classes = {
+                                JwtAuthorizationFilter.class,
+                                LoginFilter.class
+                        })
+        }
+)
 class CompanyControllerTest {
     @Autowired
     private MockMvc mvc;
