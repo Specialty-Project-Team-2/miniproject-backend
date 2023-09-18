@@ -1,9 +1,11 @@
 package com.sparta.miniproject.common.config;
 
 import lombok.experimental.UtilityClass;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @UtilityClass
 public class AuthorizeHttpRequestsConfig {
@@ -12,11 +14,14 @@ public class AuthorizeHttpRequestsConfig {
         // 인가 경로 설정
         request
                 // Company Entity 관련 API
-                .requestMatchers(HttpMethod.GET, "/detail/*").permitAll()
-                .requestMatchers(HttpMethod.GET, "/").permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/detail/*")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/")).permitAll()
 
                 // Comment Entity 관련 API
-                .requestMatchers("/api/comment/**").authenticated();
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/comment/**")).authenticated()
+
+                // h2 console 사용
+                .requestMatchers(PathRequest.toH2Console()).permitAll();
     }
 
     public void setAuthorizeHttpRequestsInLocal(HttpSecurity http) throws Exception {
