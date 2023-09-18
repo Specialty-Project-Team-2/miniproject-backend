@@ -2,6 +2,7 @@ package com.sparta.miniproject.company;
 
 import com.sparta.miniproject.common.exception.JobException;
 import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
+import com.sparta.miniproject.tool.EnableJwtAuthorizationFilterTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @EnableGlobalExceptionControllerAdviceTest
+@EnableJwtAuthorizationFilterTest
 @WebMvcTest(CompanyController.class)
 class CompanyControllerTest {
     @Autowired
@@ -30,6 +33,7 @@ class CompanyControllerTest {
     @InjectMocks
     private CompanyController companyController;
 
+    @WithMockUser
     @Test
     @DisplayName("[정상 작동] 기업 상세 정보 호출")
     void readById() throws Exception {
@@ -50,6 +54,7 @@ class CompanyControllerTest {
                 .andExpect(jsonPath("$.sales").hasJsonPath());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("[비정상 작동] 존재하지 않는 Id 호출")
     void readById_withIdNotExisted() throws Exception {
@@ -72,6 +77,7 @@ class CompanyControllerTest {
                 .andExpect(jsonPath("$.msg").hasJsonPath());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("[정상 작동] 기업 목록 호출")
     void readAll() throws Exception {
