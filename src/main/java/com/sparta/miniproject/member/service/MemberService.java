@@ -61,14 +61,14 @@ public class MemberService {
         Member member = memberRepository.findByEmail(email).orElseThrow(
                 ()-> JobException.builder()
                         .msg("login.email.not_same")
-                        .status(HttpStatus.BAD_REQUEST)
+                        .status(HttpStatus.UNAUTHORIZED)
                         .build()
         );
 
         if (!passwordEncoder.matches(password, member.getPassword())) {
             throw JobException.builder()
                     .msg("login.password.not_same")
-                    .status(HttpStatus.BAD_REQUEST)
+                    .status(HttpStatus.UNAUTHORIZED)
                     .build();
         }
 
