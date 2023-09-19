@@ -1,5 +1,6 @@
 package com.sparta.miniproject.member.controller;
 
+import com.sparta.miniproject.member.dto.LoginResponseDto;
 import com.sparta.miniproject.member.dto.LoginRequestDto;
 import com.sparta.miniproject.member.dto.MemberResponseDto;
 import com.sparta.miniproject.member.dto.SignupRequestDto;
@@ -40,7 +41,7 @@ public class MemberController {
 
     // 로그인
     @PostMapping("/api/login")
-    public ResponseEntity<MemberResponseDto> login (@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse res) {
+    public ResponseEntity<LoginResponseDto> login (@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse res) {
         return ResponseEntity.ok(memberService.login(loginRequestDto, res));
     }
 }

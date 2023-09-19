@@ -2,6 +2,7 @@ package com.sparta.miniproject.member.service;
 
 import com.sparta.miniproject.common.exception.JobException;
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
+import com.sparta.miniproject.member.dto.LoginResponseDto;
 import com.sparta.miniproject.member.dto.LoginRequestDto;
 import com.sparta.miniproject.member.dto.MemberResponseDto;
 import com.sparta.miniproject.member.dto.SignupRequestDto;
@@ -54,7 +55,7 @@ public class MemberService {
     }
 
     @Transactional
-    public MemberResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse res) {
+    public LoginResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse res) {
         String email = loginRequestDto.getEmail();
         String password = loginRequestDto.getPassword();
 
@@ -73,8 +74,7 @@ public class MemberService {
         }
 
         String token = jwtUtil.createToken(member.getEmail()) ;
-        jwtUtil.addJwtToCookie(token, res);
-        return new MemberResponseDto("로그인을 축하합니다");
+        return new LoginResponseDto("로그인을 축하합니다", token);
     }
 }
 
