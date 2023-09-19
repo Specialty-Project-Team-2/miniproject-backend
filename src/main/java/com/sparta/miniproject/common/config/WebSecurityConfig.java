@@ -4,10 +4,8 @@ import com.sparta.miniproject.common.config.chain.container.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.*;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -20,6 +18,7 @@ public class WebSecurityConfig {
     private final AuthorizeHttpRequestsContainer authorizeHttpRequestsContainer;
     private final HeadersContainer headersContainer;
     private final FilterChainContainer filterChainContainer;
+    private final CorsContainer corsContainer;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -28,6 +27,7 @@ public class WebSecurityConfig {
         http.exceptionHandling(exceptionHandlingContainer);
         http.authorizeHttpRequests(authorizeHttpRequestsContainer);
         http.headers(headersContainer);
+        http.cors(corsContainer);
 
         filterChainContainer.customize(http);
 
