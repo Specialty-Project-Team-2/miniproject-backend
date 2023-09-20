@@ -22,7 +22,7 @@ public class MypageService {
                         .status(HttpStatus.BAD_REQUEST)
                         .build()
                 );
-        return new MypageResponsDto(member.getEmail(), member.getNickname());
+        return new MypageResponsDto(member.getId(), member.getEmail(), member.getNickname());
     }
 }
 
