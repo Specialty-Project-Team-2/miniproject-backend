@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.config.chain;
+package com.sparta.miniproject.common.config;
 
 import com.sparta.miniproject.common.exception.AccessDeniedHandlerImpl;
 import com.sparta.miniproject.common.exception.AuthenticationEntryPointImpl;
@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.ExceptionH
 
 @Configuration
 @RequiredArgsConstructor
-public class ExceptionHandlingFilterChain {
+public class ExceptionHandlingConfig {
     private final AccessDeniedHandlerImpl accessDeniedHandler;
     private final AuthenticationEntryPointImpl authenticationEntryPoint;
 
