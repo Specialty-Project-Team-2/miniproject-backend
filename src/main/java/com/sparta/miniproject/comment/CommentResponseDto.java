@@ -6,12 +6,14 @@ import lombok.RequiredArgsConstructor;
 
 @Getter @Builder(toBuilder = true) @RequiredArgsConstructor
 public class CommentResponseDto {
+    private final Long id;
     private final String comment;
     private final String nickname;
     private final Long detailid;
 
     public static CommentResponseDto fromEntity(Comment entity) {
         return CommentResponseDto.builder()
+                .id(entity.getId())
                 .comment(entity.getComment())
                 .nickname(entity.getMember().getNickname())
                 .detailid(entity.getCompany().getId())

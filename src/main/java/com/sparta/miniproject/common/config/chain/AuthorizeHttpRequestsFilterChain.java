@@ -1,6 +1,7 @@
 package com.sparta.miniproject.common.config.chain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -28,7 +29,10 @@ public class AuthorizeHttpRequestsFilterChain {
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/")).permitAll()
 
                 // Comment Entity 관련 API
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/comment/**")).authenticated();
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/comment/**")).authenticated()
+
+                // 정적 리소스 경로 허용
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll();
     }
 
     @Bean
