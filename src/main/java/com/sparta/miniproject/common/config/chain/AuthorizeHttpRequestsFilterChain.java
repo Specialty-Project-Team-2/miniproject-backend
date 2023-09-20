@@ -31,6 +31,8 @@ public class AuthorizeHttpRequestsFilterChain {
                 // Comment Entity 관련 API
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/comment/**")).authenticated()
 
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/company/*/comment")).permitAll()
+
                 // 정적 리소스 경로 허용
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll();
     }
