@@ -1,7 +1,7 @@
 -- password : 1234
-INSERT INTO `member` (id, email, nickname, password)
-VALUES ('1', 'rladydqls99@naver.com', 'nick', '$2a$10$sw8G4sVnrHzd2rpGQ1GeoulDn3TvSA2N0v6LGGxwc/nGgMxMHZ.QW')
-     ,('2', 'rlaydld@asd.com', 'rasd', '$2a$10$sw8G4sVnrHzd2rpGQ1GeoulDn3TvSA2N0v6LGGxwc/nGgMxMHZ.QW');
+INSERT INTO `member` (email, nickname, password)
+VALUES ('rladydqls99@naver.com', 'nick', '$2a$10$sw8G4sVnrHzd2rpGQ1GeoulDn3TvSA2N0v6LGGxwc/nGgMxMHZ.QW')
+     ,('rlaydld@asd.com', 'rasd', '$2a$10$sw8G4sVnrHzd2rpGQ1GeoulDn3TvSA2N0v6LGGxwc/nGgMxMHZ.QW');
 
 INSERT INTO `company` (id, company_name, location)
 VALUES ('1233', 'samsung', 'seoul')
