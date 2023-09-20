@@ -4,7 +4,6 @@ import com.sparta.miniproject.common.jwtutil.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import static com.sparta.miniproject.common.jwtutil.JwtUtil.AUTHORIZATION_HEADER;
 
@@ -37,6 +33,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         try {
             String token = getJwtFromRequest(request);
+            System.out.println(request.getHeader(AUTHORIZATION_HEADER));
+            System.out.println(token);
             token = jwtUtil.substringToken(token);
 
             if(!jwtUtil.validateToken(token)) {
@@ -58,15 +56,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     }
 
     public String getJwtFromRequest(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-
-        return Arrays.stream(cookies).filter(
-                        cookie -> cookie.getName().equals(AUTHORIZATION_HEADER)
-                )
-                .findFirst()
-                .map(Cookie::getValue)
-                .map(token -> URLDecoder.decode(token, StandardCharsets.UTF_8))
-                .orElse(null);
+        return request.getHeader(AUTHORIZATION_HEADER);
     }
 
     public void setPrincipalInSecurityContextHolder(UserDetails principal) {
