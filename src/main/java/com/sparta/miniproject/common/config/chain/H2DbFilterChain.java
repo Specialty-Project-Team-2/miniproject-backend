@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.config;
+package com.sparta.miniproject.common.config.chain;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 
 @Profile("test")
 @Configuration
-public class H2DbConfig {
+public class H2DbFilterChain {
     @Bean
     public Customizer<HeadersConfigurer<HttpSecurity>> headersCustomizer() {
         return builder -> builder.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin);

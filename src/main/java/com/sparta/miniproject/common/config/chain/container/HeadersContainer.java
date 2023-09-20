@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.config.container;
+package com.sparta.miniproject.common.config.chain.container;
 
 import com.sparta.miniproject.common.security.CustomizerContainer;
 import org.springframework.security.config.Customizer;

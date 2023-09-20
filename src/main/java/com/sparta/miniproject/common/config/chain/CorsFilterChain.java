@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.config;
+package com.sparta.miniproject.common.config.chain;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
-public class CorsConfig {
+public class CorsFilterChain {
 
     @Bean
     @Profile("test")

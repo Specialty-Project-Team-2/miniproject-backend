@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.config;
+package com.sparta.miniproject.common.config.chain;
 
 import com.sparta.miniproject.common.filter.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @RequiredArgsConstructor
-public class JwtConfig {
+public class JwtFilterChain {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
 
     @Bean

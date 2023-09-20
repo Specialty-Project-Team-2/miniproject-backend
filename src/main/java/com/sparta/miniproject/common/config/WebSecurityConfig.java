@@ -1,6 +1,6 @@
 package com.sparta.miniproject.common.config;
 
-import com.sparta.miniproject.common.config.container.*;
+import com.sparta.miniproject.common.config.chain.container.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
