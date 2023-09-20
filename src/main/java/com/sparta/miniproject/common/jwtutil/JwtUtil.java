@@ -1,5 +1,6 @@
 package com.sparta.miniproject.common.jwtutil;
 
+import com.sparta.miniproject.member.entity.Member;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import java.net.URLEncoder;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 
 @Component
 public class JwtUtil {
@@ -52,12 +54,17 @@ public class JwtUtil {
 
     // JWT 생성
     // 토큰 생성
-    public String createToken(String email) {
+    public String createToken(Member entity) {
         Date date = new Date();
+
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("member_id", entity.getId());
+        payload.put("nickname", entity.getNickname());
 
         return BEARER_PREFIX +
                 Jwts.builder()
-                        .setSubject(email)
+                        .setClaims(payload)
+                        .setSubject(entity.getEmail())
                         .setExpiration(new Date(date.getTime() + TOKEN_TIME)) // 만료 시간
                         .setIssuedAt(date) // 발급일
                         .signWith(key, signatureAlgorithm) // 암호화 알고리즘

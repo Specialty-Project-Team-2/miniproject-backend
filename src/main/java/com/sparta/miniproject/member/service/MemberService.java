@@ -73,7 +73,7 @@ public class MemberService {
                     .build();
         }
 
-        String token = jwtUtil.createToken(member.getEmail()) ;
+        String token = jwtUtil.createToken(member) ;
         return new LoginResponseDto("로그인을 축하합니다", token);
     }
 }
