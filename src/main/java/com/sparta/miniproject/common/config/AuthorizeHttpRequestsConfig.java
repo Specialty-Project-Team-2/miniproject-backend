@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.config.chain;
+package com.sparta.miniproject.common.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -13,7 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @RequiredArgsConstructor
-public class AuthorizeHttpRequestsFilterChain {
+public class AuthorizeHttpRequestsConfig {
     @Bean
     public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> customizerInCommon() {
         // 인가 경로 설정

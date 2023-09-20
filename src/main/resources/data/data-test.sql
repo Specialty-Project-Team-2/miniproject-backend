@@ -10,8 +10,8 @@ VALUES ('1233', 'samsung', 'seoul')
      ,('1236', 'samsung', 'seoul')
      ,('1237', 'toss', 'daejeon');
 
--- INSERT INTO `comment` (id, comment, detail_id, member_id)
--- VALUES ('1', '복지 좋음', '1234', '1')
---      ,('3', '사장님 착함', '1234', '1')
---      ,('4', '야근 많음', '1235', '2')
---      ,('5', '밥 맛있음', '1235', '2');
+INSERT INTO `comment` (comment, detail_id, member_id)
+VALUES ('복지 좋음', '1234', '1')
+     ,('사장님 착함', '1234', '1')
+     ,('야근 많음', '1235', '2')
+     ,('밥 맛있음', '1235', '2');
