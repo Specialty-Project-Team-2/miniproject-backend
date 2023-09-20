@@ -29,6 +29,7 @@ public class AuthorizeHttpRequestsFilterChain {
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/")).permitAll()
 
                 // Comment Entity 관련 API
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/comment/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/comment/**")).authenticated()
 
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/company/*/comment")).permitAll()

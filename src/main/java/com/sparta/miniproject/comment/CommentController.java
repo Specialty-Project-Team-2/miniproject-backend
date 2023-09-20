@@ -16,9 +16,14 @@ public class CommentController {
         return commentService.create(request);
     }
 
+    @GetMapping("/api/comment")
+    public List<CommentResponseDto> readAll() {
+        return commentService.readAll();
+    }
+
     @GetMapping("/api/company/{companyId}/comment")
-    public List<CommentResponseDto> readAll(@PathVariable Long companyId) {
-        return commentService.readAll(companyId);
+    public List<CommentResponseDto> readAllByCompanyId(@PathVariable Long companyId) {
+        return commentService.readAllByCompanyId(companyId);
     }
 
     @PatchMapping("/api/comment/{commentId}")

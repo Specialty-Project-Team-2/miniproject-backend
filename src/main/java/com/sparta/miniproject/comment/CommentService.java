@@ -91,7 +91,13 @@ public class CommentService {
         }
     }
 
-    public List<CommentResponseDto> readAll(Long companyId) {
+    public List<CommentResponseDto> readAll() {
+        return commentRepository.findAll().stream()
+                .map(CommentResponseDto::fromEntity)
+                .toList();
+    }
+
+    public List<CommentResponseDto> readAllByCompanyId(Long companyId) {
         return commentRepository.findByCompany_Id(companyId).stream()
                 .map(CommentResponseDto::fromEntity)
                 .toList();
