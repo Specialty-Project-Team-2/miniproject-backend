@@ -1,6 +1,7 @@
 package com.sparta.miniproject.common.filter;
 
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
+import com.sparta.miniproject.common.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -8,11 +9,15 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -22,58 +27,54 @@ import java.util.Arrays;
 
 import static com.sparta.miniproject.common.jwtutil.JwtUtil.AUTHORIZATION_HEADER;
 
-@Component
-@RequiredArgsConstructor
+@Slf4j(topic = "JWT 검증 및 인가")
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
-    private final UserDetailsService userDetailsService;
+
     private final JwtUtil jwtUtil;
+    private final UserDetailsServiceImpl userDetailsService;
+
+    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService) {
+        this.jwtUtil = jwtUtil;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
-    protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain
-    ) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
 
-        try {
-            String token = getJwtFromRequest(request);
-            token = jwtUtil.substringToken(token);
+        String tokenValue = jwtUtil.getJwtFromHeader(req);
 
-            if(!jwtUtil.validateToken(token)) {
-                throw new IllegalAccessError();
+        if (StringUtils.hasText(tokenValue)) {
+
+            if (!jwtUtil.validateToken(tokenValue)) {
+                log.error("Token Error");
+                return;
             }
 
-            Claims claims = jwtUtil.getUserInfoFromToken(token);
-            String username = claims.getSubject();
-            UserDetails principal = userDetailsService.loadUserByUsername(username);
-            setPrincipalInSecurityContextHolder(principal);
+            Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
 
-        } catch (NullPointerException | IllegalAccessError ex) {
-            // 토큰 해석 실패는 있을 수 있는 일이므로 별다른 처리는 하지 않음.
-
-        } finally {
-            filterChain.doFilter(request, response);
-
+            try {
+                setAuthentication(info.getSubject());
+            } catch (Exception e) {
+                log.error(e.getMessage());
+                return;
+            }
         }
+
+        filterChain.doFilter(req, res);
     }
 
-    public String getJwtFromRequest(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
+    // 인증 처리
+    public void setAuthentication(String username) {
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        Authentication authentication = createAuthentication(username);
+        context.setAuthentication(authentication);
 
-        return Arrays.stream(cookies).filter(
-                        cookie -> cookie.getName().equals(AUTHORIZATION_HEADER)
-                )
-                .findFirst()
-                .map(Cookie::getValue)
-                .map(token -> URLDecoder.decode(token, StandardCharsets.UTF_8))
-                .orElse(null);
+        SecurityContextHolder.setContext(context);
     }
 
-    public void setPrincipalInSecurityContextHolder(UserDetails principal) {
-        UsernamePasswordAuthenticationToken authentication =
-                UsernamePasswordAuthenticationToken.authenticated(
-                        principal, "", principal.getAuthorities()
-                );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    // 인증 객체 생성
+    private Authentication createAuthentication(String username) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 }

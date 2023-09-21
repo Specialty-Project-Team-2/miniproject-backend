@@ -4,14 +4,12 @@ import com.sparta.miniproject.member.dto.LoginRequestDto;
 import com.sparta.miniproject.member.dto.MemberResponseDto;
 import com.sparta.miniproject.member.dto.SignupRequestDto;
 import com.sparta.miniproject.member.service.MemberService;
+import com.sparta.miniproject.member.dto.MypageResponsDto;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,8 +23,7 @@ public class MemberController {
         return "signup";
     }
 
-
-
+    // 로그인 페이지
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -43,5 +40,10 @@ public class MemberController {
     public ResponseEntity<MemberResponseDto> login (@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse res) {
         return ResponseEntity.ok(memberService.login(loginRequestDto, res));
     }
-}
 
+    // 마이 페이지
+    @GetMapping("/api/member/{memberid}")
+    public ResponseEntity<MypageResponsDto> mypage (@PathVariable Long memberid) {
+        return ResponseEntity.ok(memberService.mypage(memberid));
+    }
+}
