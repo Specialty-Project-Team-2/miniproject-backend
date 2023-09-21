@@ -21,8 +21,8 @@ public class CompanyService {
                         .build());
     }
 
-    public List<CompanyCardResponseDto> readAll() {
-        return companyRepository.findAll().stream()
+    public List<CompanyCardResponseDto> readAll(String company) {
+        return companyRepository.searchAllBy(company).stream()
                 .map(CompanyCardResponseDto::fromEntity)
                 .toList();
     }

@@ -96,7 +96,7 @@ class CompanyControllerTest {
         // given
         String urlForTest = "/";
 
-        when(companyService.readAll()).thenReturn(
+        when(companyService.readAll(any())).thenReturn(
                 CompanyFixture.caseList1().stream()
                         .map(CompanyCardResponseDto::fromEntity)
                         .toList()
