@@ -1,4 +1,4 @@
-package com.sparta.miniproject.mypage.dto;
+package com.sparta.miniproject.member.dto;
 
 import lombok.Getter;
 

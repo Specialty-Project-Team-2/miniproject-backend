@@ -1,4 +1,4 @@
-package com.sparta.miniproject.mypage.entity;
+package com.sparta.miniproject.member.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
