@@ -5,6 +5,7 @@ import com.sparta.miniproject.common.jwtutil.JwtUtil;
 import com.sparta.miniproject.member.dto.LoginResponseDto;
 import com.sparta.miniproject.member.dto.LoginRequestDto;
 import com.sparta.miniproject.member.dto.MemberResponseDto;
+import com.sparta.miniproject.member.dto.MypageResponsDto;
 import com.sparta.miniproject.member.dto.SignupRequestDto;
 import com.sparta.miniproject.member.entity.Member;
 import com.sparta.miniproject.member.repository.MemberRepository;
@@ -75,6 +76,17 @@ public class MemberService {
 
         String token = jwtUtil.createToken(member) ;
         return new LoginResponseDto("로그인을 축하합니다", token);
+    }
+
+    public MypageResponsDto mypage(Long memberid) {
+
+        Member member = memberRepository.findById(memberid).orElseThrow(
+                ()-> JobException.builder()
+                        .msg("mypage.not_found")
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build()
+        );
+        return new MypageResponsDto(member.getEmail(), member.getNickname());
     }
 }
 
