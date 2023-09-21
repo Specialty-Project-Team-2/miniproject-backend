@@ -3,7 +3,6 @@ package com.sparta.miniproject.common.filter;
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
 import com.sparta.miniproject.member.repository.MemberRepository;
 import com.sparta.miniproject.tool.ApplicationContextSupplier;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -40,14 +39,9 @@ class JwtAuthorizationFilterTest {
         // 쿠키가 내재된 MockHttpServletRequest
         final String REAL_COOKIE_VALUE = "real one";
 
-        Cookie cookie1 = new Cookie("mock_key_1", "mock value 1");
-        Cookie cookie2 = new Cookie("mock_key_1", "mock value 1");
-        Cookie cookie3 = new Cookie("Authorization", REAL_COOKIE_VALUE);
-        Cookie[] cookies = {cookie1, cookie2, cookie3};
-
         HttpServletRequest mockHttpServletRequest = Mockito.mock(HttpServletRequest.class);
-        when(mockHttpServletRequest.getCookies())
-                .thenReturn(cookies);
+        when(mockHttpServletRequest.getHeader("Authorization"))
+                .thenReturn(REAL_COOKIE_VALUE);
 
         // when
         String jwt = jwtAuthorizationFilter.getJwtFromRequest(mockHttpServletRequest);
