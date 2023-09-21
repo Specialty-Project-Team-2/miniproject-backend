@@ -22,10 +22,14 @@ public class UserDetailsImpl implements UserDetails {
         return List.of(authorityOfUser);
     }
 
+    public Member getMember() {
+        return member;
+    }
     @Override
     public String getPassword() {
         // 로그인 과정을 직접 구현하기 때문에 필요 없음.
-        return "";
+//        return "";
+        return member.getPassword();
     }
 
     @Override
@@ -35,21 +39,21 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
