@@ -17,6 +17,9 @@ public class AuthorizeHttpRequestsConfig {
                 .requestMatchers(HttpMethod.GET, "/").permitAll()
 
                 // Comment Entity 관련 API
+                .requestMatchers(HttpMethod.GET, "/api/company/*/comment").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/comment/**").permitAll()
+
                 .requestMatchers("/api/comment/**").authenticated()
 
                 // 정적 리소스 경로 허용

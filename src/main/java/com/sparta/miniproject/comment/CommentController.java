@@ -4,6 +4,8 @@ import com.sparta.miniproject.common.dto.CodeResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class CommentController {
@@ -12,6 +14,16 @@ public class CommentController {
     @PostMapping("/api/comment")
     public CommentResponseDto create(@RequestBody CommentCreateRequestDto request) {
         return commentService.create(request);
+    }
+
+    @GetMapping("/api/comment")
+    public List<CommentResponseDto> readAll() {
+        return commentService.readAll();
+    }
+
+    @GetMapping("/api/company/{companyId}/comment")
+    public List<CommentResponseDto> readAllByCompanyId(@PathVariable Long companyId) {
+        return commentService.readAllByCompanyId(companyId);
     }
 
     @PatchMapping("/api/comment/{commentId}")
