@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @RestController
 @RequiredArgsConstructor
 public class KakaoController {
@@ -17,13 +20,17 @@ public class KakaoController {
     private final KakaoService kakaoService;
 
     //https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7af57035200ce2da34864e794371c7db&redirect_uri=http://localhost:8080/api/user/kakao/callback
+
     @GetMapping("/api/user/kakao/callback")
     public String kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
         String token = kakaoService.kakaoLogin(code);
 
+        token = URLEncoder.encode(token, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, token);
         cookie.setPath("/");
         response.addCookie(cookie);
-        return "redirect:/";
+
+        return "로그인에 성공했습니다";
     }
 }

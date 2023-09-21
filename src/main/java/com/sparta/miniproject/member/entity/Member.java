@@ -25,10 +25,24 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String nickname;
 
+    private Long kakaoId;
+
 
     public Member(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public Member(String email, String password, String nickname, Long kakaoId) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.kakaoId = kakaoId;
+    }
+
+    public Member kakaoIdUpdate(Long kakaoId) {
+        this.kakaoId = kakaoId;
+        return this;
     }
 }
