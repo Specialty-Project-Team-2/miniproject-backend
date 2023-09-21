@@ -1,6 +1,7 @@
 package com.sparta.miniproject.comment;
 
 
+import com.sparta.miniproject.common.entity.Timestamped;
 import com.sparta.miniproject.company.Company;
 import com.sparta.miniproject.member.entity.Member;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity @Table(name = "comment")
 @Getter @Setter @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Comment {
+public class Comment extends Timestamped {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
