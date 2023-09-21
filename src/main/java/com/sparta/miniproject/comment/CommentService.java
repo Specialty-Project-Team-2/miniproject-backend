@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -87,5 +89,17 @@ public class CommentService {
                     .status(HttpStatus.FORBIDDEN)
                     .build();
         }
+    }
+
+    public List<CommentResponseDto> readAll() {
+        return commentRepository.findAll().stream()
+                .map(CommentResponseDto::fromEntity)
+                .toList();
+    }
+
+    public List<CommentResponseDto> readAllByCompanyId(Long companyId) {
+        return commentRepository.findByCompany_Id(companyId).stream()
+                .map(CommentResponseDto::fromEntity)
+                .toList();
     }
 }

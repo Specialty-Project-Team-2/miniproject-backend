@@ -2,7 +2,6 @@ package com.sparta.miniproject.comment;
 
 import com.sparta.miniproject.common.dto.CodeResponseDto;
 import com.sparta.miniproject.common.filter.JwtAuthorizationFilter;
-import com.sparta.miniproject.member.filter.LoginFilter;
 import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,8 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 @Filter(
                         type = FilterType.ASSIGNABLE_TYPE,
                         classes = {
-                                JwtAuthorizationFilter.class,
-                                LoginFilter.class
+                                JwtAuthorizationFilter.class
                 })
         }
 )

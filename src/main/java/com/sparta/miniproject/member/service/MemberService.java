@@ -2,6 +2,7 @@ package com.sparta.miniproject.member.service;
 
 import com.sparta.miniproject.common.exception.JobException;
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
+import com.sparta.miniproject.member.dto.LoginResponseDto;
 import com.sparta.miniproject.member.dto.LoginRequestDto;
 import com.sparta.miniproject.member.dto.MemberResponseDto;
 import com.sparta.miniproject.member.dto.MypageResponsDto;
@@ -55,7 +56,7 @@ public class MemberService {
     }
 
     @Transactional
-    public MemberResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse res) {
+    public LoginResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse res) {
         String email = loginRequestDto.getEmail();
         String password = loginRequestDto.getPassword();
 
@@ -73,9 +74,8 @@ public class MemberService {
                     .build();
         }
 
-        String token = jwtUtil.createToken(member.getEmail()) ;
-        jwtUtil.addJwtToCookie(token, res);
-        return new MemberResponseDto("로그인을 축하합니다");
+        String token = jwtUtil.createToken(member) ;
+        return new LoginResponseDto("로그인을 축하합니다", token);
     }
 
     public MypageResponsDto mypage(Long memberid) {
@@ -86,7 +86,7 @@ public class MemberService {
                         .status(HttpStatus.BAD_REQUEST)
                         .build()
         );
-        return new MypageResponsDto(member.getEmail(), member.getNickname());
+        return new MypageResponsDto(member.getId(), member.getEmail(), member.getNickname());
     }
 }
 

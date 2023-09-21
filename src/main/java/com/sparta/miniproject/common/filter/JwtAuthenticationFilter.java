@@ -3,6 +3,7 @@ package com.sparta.miniproject.common.filter;
 
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
 import com.sparta.miniproject.common.security.UserDetailsImpl;
+import com.sparta.miniproject.member.entity.Member;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,9 +43,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
-        String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
+        Member member = ((UserDetailsImpl) authResult.getPrincipal()).getMember();
 
-        String token = jwtUtil.createToken(username);
+        String token = jwtUtil.createToken(member);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
     }
 
