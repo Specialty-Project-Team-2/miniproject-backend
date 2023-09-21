@@ -43,7 +43,7 @@ public class MemberController {
     }
 
     // 마이 페이지
-    @GetMapping("/api/member/{memberid}")
+    @GetMapping("/mypage/{memberid}")
     public ResponseEntity<MypageResponsDto> mypage (@PathVariable Long memberid) {
         return ResponseEntity.ok(memberService.mypage(memberid));
     }
