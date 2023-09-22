@@ -2,6 +2,9 @@ package com.sparta.miniproject.comment;
 
 import com.sparta.miniproject.common.dto.CodeResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +25,11 @@ public class CommentController {
     }
 
     @GetMapping("/api/company/{companyId}/comment")
-    public List<CommentResponseDto> readAllByCompanyId(@PathVariable Long companyId) {
-        return commentService.readAllByCompanyId(companyId);
+    public Page<CommentResponseDto> readAllByCompanyId(
+            @PathVariable Long companyId,
+            @PageableDefault Pageable pageable
+    ) {
+        return commentService.readAllByCompanyId(companyId, pageable);
     }
 
     @PatchMapping("/api/comment/{commentId}")

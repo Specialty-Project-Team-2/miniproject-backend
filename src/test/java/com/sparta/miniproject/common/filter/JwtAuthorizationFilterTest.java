@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.when;
 @ApplicationContextSupplier
 @Import(JwtAuthorizationFilter.class)
 @MockBeans({
+        @MockBean(AccessDeniedHandler.class),
         @MockBean(JwtUtil.class),
         @MockBean(UserDetailsService.class),
         @MockBean(MemberRepository.class)
