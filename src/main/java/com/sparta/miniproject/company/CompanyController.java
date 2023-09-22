@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,8 +21,9 @@ public class CompanyController {
 
     @GetMapping("/api/company")
     public Page<CompanyCardResponseDto> readAll(
+            @RequestParam(name = "name", required = false) String keyword,
             @PageableDefault Pageable pageable
     ) {
-        return companyService.readAll(pageable);
+        return companyService.readAll(keyword, pageable);
     }
 }

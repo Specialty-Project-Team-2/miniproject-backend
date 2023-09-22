@@ -1,9 +1,9 @@
 package com.sparta.miniproject.company.query;
 
 import com.sparta.miniproject.company.Company;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface SearchCompanyRepository {
-    List<Company> searchAllBy(String keywordCompanyName);
+    Page<Company> searchAllBy(String keywordCompanyName, Pageable pageable);
 }

@@ -6,6 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.lang.annotation.ElementType;
@@ -31,14 +34,15 @@ class CompanyRepositoryImplTest {
     void searchAllBy() {
         // given
         String keywordCompanyName = "kakao";
+        Pageable pageable = PageRequest.of(0, 5);
 
         // when
-        List<Company> companies = companyRepositoryImpl.searchAllBy(keywordCompanyName);
+        Page<Company> companies = companyRepositoryImpl.searchAllBy(keywordCompanyName, pageable);
 
         // then
         int totalSizeOfTestcase = 3;
 
-        assertThat(companies.size()).isEqualTo(totalSizeOfTestcase);
+        assertThat(companies.getTotalElements()).isEqualTo(totalSizeOfTestcase);
 
         for (Company company : companies) {
             String companyName = company.getCompanyName();
@@ -54,14 +58,15 @@ class CompanyRepositoryImplTest {
     void searchAllByNoKeyword() {
         // given
         String keywordCompanyName = null;
+        Pageable pageable = PageRequest.of(0, 5);
 
         // when
-        List<Company> companies = companyRepositoryImpl.searchAllBy(keywordCompanyName);
+        Page<Company> companies = companyRepositoryImpl.searchAllBy(keywordCompanyName, pageable);
 
         // then
         int totalSizeOfTestcase = 6;
 
-        assertThat(companies.size()).isEqualTo(totalSizeOfTestcase);
+        assertThat(companies.getTotalElements()).isEqualTo(totalSizeOfTestcase);
 
         for (Company company : companies) {
             log.info(company.getCompanyName());
@@ -86,6 +91,29 @@ class CompanyRepositoryImplTest {
         for (Company company : companies) {
             log.info(company.getCompanyName());
         }
+    }
+
+    @LoadTestcase1
+    @Test
+    @DisplayName("[정상 작동] 페이징 테스트.")
+    void searchAllByWithPageable() {
+        // given
+        String keywordCompanyName = "a";
+        Pageable pageable = PageRequest.of(0, 2);
+
+        // when
+        Page<Company> companies = companyRepositoryImpl.searchAllBy(keywordCompanyName, pageable);
+
+        // then
+        int totalSizeOfTestcase = 6;
+        int totalPageOfTestcase = 3;
+
+        // 총 갯수 확인. - countQuery 확인.
+        assertThat(companies.getTotalElements()).isEqualTo(totalSizeOfTestcase);
+        // 총 페이지 수 확인.
+        assertThat(companies.getTotalPages()).isEqualTo(totalPageOfTestcase);
+        // 첫 페이지 감지 유무.
+        assertThat(companies.getPageable().hasPrevious()).isFalse();
     }
 
     @Target(ElementType.METHOD)

@@ -22,7 +22,7 @@ public class CompanyService {
     }
 
     public Page<CompanyCardResponseDto> readAll(String company, Pageable pageable) {
-        return companyRepository.searchAllBy(company)
+        return companyRepository.searchAllBy(company, pageable)
                 .map(CompanyCardResponseDto::fromEntity);
     }
 }
