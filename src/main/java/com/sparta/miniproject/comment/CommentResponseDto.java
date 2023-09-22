@@ -10,7 +10,7 @@ public class CommentResponseDto {
     private final String comment;
     private final String nickname;
     private final Long memberId;
-    private final Long detailid;
+    private final Long companyId;
 
     public static CommentResponseDto fromEntity(Comment entity) {
         return CommentResponseDto.builder()
@@ -18,7 +18,7 @@ public class CommentResponseDto {
                 .comment(entity.getComment())
                 .nickname(entity.getMember().getNickname())
                 .memberId(entity.getMember().getId())
-                .detailid(entity.getCompany().getId())
+                .companyId(entity.getCompany().getId())
                 .build();
     }
 }

@@ -50,7 +50,7 @@ class CompanyControllerTest {
     void readById() throws Exception {
         // given
         Long id = 1L;
-        String urlForTest = String.format("/detail/%s", id);
+        String urlForTest = String.format("/api/company/%s", id);
 
         when(companyService.readById(any())).thenReturn(
                 CompanyResponseDto.fromEntity(CompanyFixture.case1())
@@ -71,7 +71,7 @@ class CompanyControllerTest {
     void readById_withIdNotExisted() throws Exception {
         // given
         Long id = 1L;
-        String urlForTest = String.format("/detail/%s", id);
+        String urlForTest = String.format("/api/company/%s", id);
         HttpStatus status = HttpStatus.CONFLICT;
 
         when(companyService.readById(any())).thenThrow(
@@ -93,7 +93,7 @@ class CompanyControllerTest {
     @DisplayName("[정상 작동] 기업 목록 호출")
     void readAll() throws Exception {
         // given
-        String urlForTest = "/";
+        String urlForTest = "/api/company";
 
         when(companyService.readAll(any())).thenReturn(
                 new PageImpl<>(CompanyFixture.caseList1())
@@ -113,7 +113,7 @@ class CompanyControllerTest {
     @DisplayName("[정상 작동] 기업 목록 호출 시, 페이지네이션 작동 여부 확인.")
     void readAllWithPagination() throws Exception {
         // given
-        String urlForTest = "/";
+        String urlForTest = "/api/company";
 
         when(companyService.readAll(any())).thenReturn(
                 new PageImpl<>(CompanyFixture.caseList1())

@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public class CommentCreateRequestDto {
     private String comment;
-    private Long detailid;
 
     public Comment toEntity() {
         Comment entity = new Comment();

@@ -49,14 +49,14 @@ class CommentControllerTest {
     @DisplayName("[정상 작동] 댓글 생성")
     void create() throws Exception {
         // given
-        String urlForTest = "/api/comment";
+        String urlForTest = "/api/company/1/comment";
         CommentCreateRequestDto request = new CommentCreateRequestDto();
 
-        when(commentService.create(any())).thenReturn(
+        when(commentService.create(any(), any())).thenReturn(
                 CommentResponseDto.builder()
                         .comment("mock comment1")
                         .nickname("mock nickname1")
-                        .detailid(1L)
+                        .companyId(1L)
                         .build()
         );
 
@@ -68,7 +68,7 @@ class CommentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.comment").hasJsonPath())
                 .andExpect(jsonPath("$.nickname").hasJsonPath())
-                .andExpect(jsonPath("$.detailid").hasJsonPath());
+                .andExpect(jsonPath("$.companyId").hasJsonPath());
     }
 
     @WithMockUser
@@ -84,7 +84,7 @@ class CommentControllerTest {
                 CommentResponseDto.builder()
                         .comment("mock comment1")
                         .nickname("mock nickname1")
-                        .detailid(1L)
+                        .companyId(1L)
                         .build()
         );
 
@@ -96,7 +96,7 @@ class CommentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.comment").hasJsonPath())
                 .andExpect(jsonPath("$.nickname").hasJsonPath())
-                .andExpect(jsonPath("$.detailid").hasJsonPath());
+                .andExpect(jsonPath("$.companyId").hasJsonPath());
     }
 
     @WithMockUser
@@ -141,7 +141,7 @@ class CommentControllerTest {
                 .andExpect(jsonPath("$[*].comment").hasJsonPath())
                 .andExpect(jsonPath("$[*].nickname").hasJsonPath())
                 .andExpect(jsonPath("$[*].memberId").hasJsonPath())
-                .andExpect(jsonPath("$[*].detailid").hasJsonPath());
+                .andExpect(jsonPath("$[*].companyId").hasJsonPath());
     }
 
     @WithMockUser
@@ -168,6 +168,6 @@ class CommentControllerTest {
                 .andExpect(jsonPath("$.content[*].comment").hasJsonPath())
                 .andExpect(jsonPath("$.content[*].nickname").hasJsonPath())
                 .andExpect(jsonPath("$.content[*].memberId").hasJsonPath())
-                .andExpect(jsonPath("$.content[*].detailid").hasJsonPath());
+                .andExpect(jsonPath("$.content[*].companyId").hasJsonPath());
     }
 }
