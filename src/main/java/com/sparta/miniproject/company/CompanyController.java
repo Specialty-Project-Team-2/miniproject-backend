@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyController {
     private final CompanyService companyService;
 
-    @GetMapping("/detail/{companyId}")
+    @GetMapping("/api/company/{companyId}")
     public CompanyResponseDto readById(@PathVariable Long companyId) {
         return companyService.readById(companyId);
     }
 
-    @GetMapping("/")
+    @GetMapping("/api/company")
     public Page<CompanyCardResponseDto> readAll(
             @PageableDefault Pageable pageable
     ) {

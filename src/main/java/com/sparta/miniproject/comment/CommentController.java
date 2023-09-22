@@ -14,9 +14,12 @@ import java.util.List;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/api/comment")
-    public CommentResponseDto create(@RequestBody CommentCreateRequestDto request) {
-        return commentService.create(request);
+    @PostMapping("/api/company/{companyId}/comment")
+    public CommentResponseDto create(
+            @PathVariable Long companyId,
+            @RequestBody CommentCreateRequestDto request
+    ) {
+        return commentService.create(companyId, request);
     }
 
     @GetMapping("/api/comment")

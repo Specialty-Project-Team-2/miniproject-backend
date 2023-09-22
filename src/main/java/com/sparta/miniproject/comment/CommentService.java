@@ -24,12 +24,11 @@ public class CommentService {
     private final MessageSourceUtil source;
 
     @Transactional
-    public CommentResponseDto create(CommentCreateRequestDto request) {
+    public CommentResponseDto create(Long companyId, CommentCreateRequestDto request) {
         Comment entity = request.toEntity();
 
         // 회사 엔티티 주입.
-        Long detailId = request.getDetailid();
-        Company companyEntity = findCompanyById(detailId);
+        Company companyEntity = findCompanyById(companyId);
         entity.setCompany(companyEntity);
 
         Comment saved = commentRepository.save(entity);

@@ -18,18 +18,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 회원가입 페이지
-    @GetMapping("/signup")
-    public String signupPage() {
-        return "signup";
-    }
-
-    // 로그인 페이지
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
     // 회원가입
     @PostMapping("/api/signup")
     public ResponseEntity<MemberResponseDto> signup (@RequestBody @Valid SignupRequestDto signupRequestDto) {
@@ -43,7 +31,7 @@ public class MemberController {
     }
 
     // 마이 페이지
-    @GetMapping("/mypage/{memberid}")
+    @GetMapping("/api/member/{memberid}")
     public ResponseEntity<MypageResponsDto> mypage (@PathVariable Long memberid) {
         return ResponseEntity.ok(memberService.mypage(memberid));
     }
