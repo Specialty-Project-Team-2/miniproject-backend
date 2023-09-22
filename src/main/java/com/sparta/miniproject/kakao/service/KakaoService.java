@@ -70,7 +70,6 @@ public class KakaoService {
         body.add("client_id", kakaoOAuth2Properties.getClientId());
         body.add("redirect_uri", kakaoOAuth2Properties.getRedirectUrl());
         body.add("code", code);
-        log.info(kakaoOAuth2Properties.getRedirectUrl());
 
         RequestEntity<MultiValueMap<String, String>> requestEntity = RequestEntity
                 .post(uri)
