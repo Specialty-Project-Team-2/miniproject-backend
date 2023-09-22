@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
+import com.sparta.miniproject.kakao.config.KakaoOAuth2Properties;
 import com.sparta.miniproject.kakao.dto.KakaoUserInfoDto;
 import com.sparta.miniproject.member.entity.Member;
 import com.sparta.miniproject.member.repository.MemberRepository;
@@ -31,6 +32,7 @@ public class KakaoService {
     private final MemberRepository memberRepository;
     private final RestTemplate restTemplate;
     private final JwtUtil jwtUtil;
+    private final KakaoOAuth2Properties kakaoOAuth2Properties;
 
     public String kakaoLogin(String code) throws JsonProcessingException {
         // 1. "인가 코드"로 "액세스 토큰" 요청
@@ -65,8 +67,8 @@ public class KakaoService {
         // HTTP Body 생성
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
-        body.add("client_id", "7af57035200ce2da34864e794371c7db");
-        body.add("redirect_uri", "http://3.36.132.42:8080/api/user/kakao/callback");
+        body.add("client_id", kakaoOAuth2Properties.getClientId());
+        body.add("redirect_uri", kakaoOAuth2Properties.getRedirectUrl());
         body.add("code", code);
 
         RequestEntity<MultiValueMap<String, String>> requestEntity = RequestEntity
