@@ -2,10 +2,10 @@ package com.sparta.miniproject.company;
 
 import com.sparta.miniproject.common.exception.JobException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +21,8 @@ public class CompanyService {
                         .build());
     }
 
-    public List<CompanyCardResponseDto> readAll(String company) {
-        return companyRepository.searchAllBy(company).stream()
-                .map(CompanyCardResponseDto::fromEntity)
-                .toList();
+    public Page<CompanyCardResponseDto> readAll(String company, Pageable pageable) {
+        return companyRepository.searchAllBy(company)
+                .map(CompanyCardResponseDto::fromEntity);
     }
 }

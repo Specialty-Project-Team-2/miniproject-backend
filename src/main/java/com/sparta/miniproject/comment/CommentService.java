@@ -8,6 +8,8 @@ import com.sparta.miniproject.company.Company;
 import com.sparta.miniproject.company.CompanyRepository;
 import com.sparta.miniproject.member.entity.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +24,11 @@ public class CommentService {
     private final MessageSourceUtil source;
 
     @Transactional
-    public CommentResponseDto create(CommentCreateRequestDto request) {
+    public CommentResponseDto create(Long companyId, CommentCreateRequestDto request) {
         Comment entity = request.toEntity();
 
         // 회사 엔티티 주입.
-        Long detailId = request.getDetailid();
-        Company companyEntity = findCompanyById(detailId);
+        Company companyEntity = findCompanyById(companyId);
         entity.setCompany(companyEntity);
 
         Comment saved = commentRepository.save(entity);
@@ -97,9 +98,8 @@ public class CommentService {
                 .toList();
     }
 
-    public List<CommentResponseDto> readAllByCompanyId(Long companyId) {
-        return commentRepository.findByCompany_Id(companyId).stream()
-                .map(CommentResponseDto::fromEntity)
-                .toList();
+    public Page<CommentResponseDto> readAllByCompanyId(Long companyId, Pageable pageable) {
+        return commentRepository.findByCompany_Id(companyId, pageable)
+                .map(CommentResponseDto::fromEntity);
     }
 }

@@ -1,7 +1,11 @@
 package com.sparta.miniproject.comment;
 
 import com.sparta.miniproject.company.Company;
+import com.sparta.miniproject.company.CompanyFixture;
+import com.sparta.miniproject.member.MemberFixture;
 import com.sparta.miniproject.member.entity.Member;
+
+import java.util.List;
 
 public class CommentFixture {
     public static Comment case1(Company company, Member member) {
@@ -20,5 +24,19 @@ public class CommentFixture {
         entity.setCompany(company);
         entity.setMember(member);
         return entity;
+    }
+
+    public static List<Comment> caseList1() {
+        Company company1 = CompanyFixture.case1();
+        Company company2 = CompanyFixture.case2();
+        Member member1 = MemberFixture.case1();
+        Member member2 = MemberFixture.case2();
+
+        return List.of(
+                case1(company1, member1),
+                case2(company1, member2),
+                case1(company2, member1),
+                case2(company2, member2)
+        );
     }
 }
