@@ -50,15 +50,13 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             UserDetails principal = userDetailsService.loadUserByUsername(username);
             setPrincipalInSecurityContextHolder(principal);
 
-            filterChain.doFilter(request, response);
-
         } catch (NullPointerException ex) {
             // 토큰 해석 실패는 있을 수 있는 일이므로 별다른 처리는 하지 않음.
-            filterChain.doFilter(request, response);
 
         } catch (AccessDeniedException ex) {
-            accessDeniedHandler.handle(request, response, ex);
 
+        } finally {
+            filterChain.doFilter(request, response);
         }
     }
 
