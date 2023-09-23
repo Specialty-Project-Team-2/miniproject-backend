@@ -1,5 +1,8 @@
 package com.sparta.miniproject.member.entity;
 
+import com.sparta.miniproject.member.dto.MemberRequestDto;
+import com.sparta.miniproject.member.dto.MypageResponsDto;
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,5 +47,14 @@ public class Member {
     public Member kakaoIdUpdate(Long kakaoId) {
         this.kakaoId = kakaoId;
         return this;
+    }
+
+    public void update (MemberRequestDto memberRequestDto){
+        if(!StringUtils.isBlank(memberRequestDto.getNickname())) {
+            this.nickname = memberRequestDto.getNickname().strip();
+        }
+        if(!StringUtils.isBlank(memberRequestDto.getPassword())) {
+            this.password = memberRequestDto.getPassword().strip();
+        }
     }
 }

@@ -2,13 +2,12 @@ package com.sparta.miniproject.member.service;
 
 import com.sparta.miniproject.common.exception.JobException;
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
-import com.sparta.miniproject.member.dto.LoginResponseDto;
-import com.sparta.miniproject.member.dto.LoginRequestDto;
-import com.sparta.miniproject.member.dto.MemberResponseDto;
-import com.sparta.miniproject.member.dto.MypageResponsDto;
-import com.sparta.miniproject.member.dto.SignupRequestDto;
+import com.sparta.miniproject.common.util.SecurityUtil;
+import com.sparta.miniproject.member.dto.*;
 import com.sparta.miniproject.member.entity.Member;
 import com.sparta.miniproject.member.repository.MemberRepository;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -61,7 +60,7 @@ public class MemberService {
         String password = loginRequestDto.getPassword();
 
         Member member = memberRepository.findByEmail(email).orElseThrow(
-                ()-> JobException.builder()
+                () -> JobException.builder()
                         .msg("login.email.not_same")
                         .status(HttpStatus.UNAUTHORIZED)
                         .build()
@@ -74,19 +73,43 @@ public class MemberService {
                     .build();
         }
 
-        String token = jwtUtil.createToken(member) ;
+        String token = jwtUtil.createToken(member);
         return new LoginResponseDto("로그인을 축하합니다", token);
     }
 
     public MypageResponsDto mypage(Long memberid) {
 
         Member member = memberRepository.findById(memberid).orElseThrow(
-                ()-> JobException.builder()
+                () -> JobException.builder()
                         .msg("mypage.not_found")
                         .status(HttpStatus.BAD_REQUEST)
                         .build()
         );
         return new MypageResponsDto(member.getId(), member.getEmail(), member.getNickname());
+    }
+
+    public MypageResponsDto mypageUpdateNickname(MemberRequestDto memberRequestDto) {
+
+//        Member member = memberRepository.findById(memberid).orElseThrow(
+//                () -> JobException.builder()
+//                        .msg("mypage.not_found")
+//                        .status(HttpStatus.BAD_REQUEST)
+//                        .build()
+//        );
+        Optional<Member> optionalMember = SecurityUtil.getMemberLoggedIn();
+        Member memberLoggedIn = optionalMember.get();
+
+//        if (!member.getEmail().equals(nickname)) {
+//            throw JobException.builder()
+//                    .msg("not_same")
+//                    .status(HttpStatus.UNAUTHORIZED)
+//                    .build();
+//        }
+
+        memberLoggedIn.update(memberRequestDto);
+        String nickname = memberRequestDto.getNickname();
+        String password = memberRequestDto.getPassword();
+        return new MypageResponsDto(nickname, password);
     }
 }
 

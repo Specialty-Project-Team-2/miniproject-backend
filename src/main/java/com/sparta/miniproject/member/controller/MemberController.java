@@ -1,14 +1,12 @@
 package com.sparta.miniproject.member.controller;
 
-import com.sparta.miniproject.member.dto.LoginResponseDto;
-import com.sparta.miniproject.member.dto.LoginRequestDto;
-import com.sparta.miniproject.member.dto.MemberResponseDto;
-import com.sparta.miniproject.member.dto.SignupRequestDto;
+import com.sparta.miniproject.member.dto.*;
 import com.sparta.miniproject.member.service.MemberService;
-import com.sparta.miniproject.member.dto.MypageResponsDto;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,5 +32,11 @@ public class MemberController {
     @GetMapping("/api/member/{memberid}")
     public ResponseEntity<MypageResponsDto> mypage (@PathVariable Long memberid) {
         return ResponseEntity.ok(memberService.mypage(memberid));
+    }
+
+    // 회원 닉네임 수정
+    @PutMapping ("/api/member/update/{memberid}")
+    public ResponseEntity<MypageResponsDto> mypageUpdateNickname (@RequestBody MemberRequestDto memberRequestDto) {
+        return ResponseEntity.ok(memberService.mypageUpdateNickname(memberRequestDto));
     }
 }
