@@ -6,8 +6,6 @@ import com.sparta.miniproject.common.util.SecurityUtil;
 import com.sparta.miniproject.member.dto.*;
 import com.sparta.miniproject.member.entity.Member;
 import com.sparta.miniproject.member.repository.MemberRepository;
-import io.jsonwebtoken.Claims;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -88,28 +86,13 @@ public class MemberService {
         return new MypageResponsDto(member.getId(), member.getEmail(), member.getNickname());
     }
 
-    public MypageResponsDto mypageUpdateNickname(MemberRequestDto memberRequestDto) {
-
-//        Member member = memberRepository.findById(memberid).orElseThrow(
-//                () -> JobException.builder()
-//                        .msg("mypage.not_found")
-//                        .status(HttpStatus.BAD_REQUEST)
-//                        .build()
-//        );
+    @Transactional
+    public MypageResponsDto mypageUpdate(MemberRequestDto memberRequestDto) {
         Optional<Member> optionalMember = SecurityUtil.getMemberLoggedIn();
         Member memberLoggedIn = optionalMember.get();
 
-//        if (!member.getEmail().equals(nickname)) {
-//            throw JobException.builder()
-//                    .msg("not_same")
-//                    .status(HttpStatus.UNAUTHORIZED)
-//                    .build();
-//        }
-
-        memberLoggedIn.update(memberRequestDto);
-        String nickname = memberRequestDto.getNickname();
-        String password = memberRequestDto.getPassword();
-        return new MypageResponsDto(nickname, password);
+        memberLoggedIn.update(memberRequestDto, passwordEncoder);
+        return new MypageResponsDto(memberLoggedIn);
     }
 }
 

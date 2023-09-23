@@ -1,12 +1,12 @@
 package com.sparta.miniproject.member.entity;
 
 import com.sparta.miniproject.member.dto.MemberRequestDto;
-import com.sparta.miniproject.member.dto.MypageResponsDto;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Getter
@@ -49,12 +49,13 @@ public class Member {
         return this;
     }
 
-    public void update (MemberRequestDto memberRequestDto){
+    public void update (MemberRequestDto memberRequestDto, PasswordEncoder passwordEncoder){
         if(!StringUtils.isBlank(memberRequestDto.getNickname())) {
             this.nickname = memberRequestDto.getNickname().strip();
         }
         if(!StringUtils.isBlank(memberRequestDto.getPassword())) {
-            this.password = memberRequestDto.getPassword().strip();
+            String password = memberRequestDto.getPassword().strip();
+            this.password = passwordEncoder.encode(password);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.sparta.miniproject.member.dto;
 
+import com.sparta.miniproject.member.entity.Member;
 import lombok.Getter;
 
 @Getter
@@ -15,8 +16,10 @@ public class MypageResponsDto {
         this.nickname = nickname;
     }
 
-    public MypageResponsDto(String password, String nickname) {
-        this.password = password;
-        this.nickname = nickname;
+    public MypageResponsDto(Member entity) {
+        this.id = entity.getId();
+        this.email = entity.getEmail();
+        this.nickname = entity.getNickname();
+        this.password = entity.getPassword();
     }
 }
