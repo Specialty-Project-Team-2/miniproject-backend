@@ -24,6 +24,8 @@ public class AuthorizeHttpRequestsConfig {
 
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/mypage/*")).permitAll()
 
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/api/member/me")).authenticated()
+
                 // Company Entity 관련 API
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/detail/*")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/")).permitAll()
