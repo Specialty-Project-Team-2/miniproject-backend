@@ -2,11 +2,8 @@ package com.sparta.miniproject.member.service;
 
 import com.sparta.miniproject.common.exception.JobException;
 import com.sparta.miniproject.common.jwtutil.JwtUtil;
-import com.sparta.miniproject.member.dto.LoginResponseDto;
-import com.sparta.miniproject.member.dto.LoginRequestDto;
-import com.sparta.miniproject.member.dto.MemberResponseDto;
-import com.sparta.miniproject.member.dto.MypageResponsDto;
-import com.sparta.miniproject.member.dto.SignupRequestDto;
+import com.sparta.miniproject.common.util.SecurityUtil;
+import com.sparta.miniproject.member.dto.*;
 import com.sparta.miniproject.member.entity.Member;
 import com.sparta.miniproject.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletResponse;
@@ -61,7 +58,7 @@ public class MemberService {
         String password = loginRequestDto.getPassword();
 
         Member member = memberRepository.findByEmail(email).orElseThrow(
-                ()-> JobException.builder()
+                () -> JobException.builder()
                         .msg("login.email.not_same")
                         .status(HttpStatus.UNAUTHORIZED)
                         .build()
@@ -74,19 +71,28 @@ public class MemberService {
                     .build();
         }
 
-        String token = jwtUtil.createToken(member) ;
+        String token = jwtUtil.createToken(member);
         return new LoginResponseDto("로그인을 축하합니다", token);
     }
 
     public MypageResponsDto mypage(Long memberid) {
 
         Member member = memberRepository.findById(memberid).orElseThrow(
-                ()-> JobException.builder()
+                () -> JobException.builder()
                         .msg("mypage.not_found")
                         .status(HttpStatus.BAD_REQUEST)
                         .build()
         );
         return new MypageResponsDto(member.getId(), member.getEmail(), member.getNickname());
+    }
+
+    @Transactional
+    public MypageResponsDto mypageUpdate(MemberRequestDto memberRequestDto) {
+        Optional<Member> optionalMember = SecurityUtil.getMemberLoggedIn();
+        Member memberLoggedIn = optionalMember.get();
+
+        memberLoggedIn.update(memberRequestDto, passwordEncoder);
+        return new MypageResponsDto(memberLoggedIn);
     }
 }
 

@@ -1,5 +1,6 @@
 package com.sparta.miniproject.member.repository;
 
+import com.sparta.miniproject.member.dto.MemberResponseDto;
 import com.sparta.miniproject.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 
     Optional<Member> findByKakaoId(Long kakaoId);
+
 }
