@@ -92,6 +92,7 @@ public class MemberService {
         Member memberLoggedIn = optionalMember.get();
 
         memberLoggedIn.update(memberRequestDto, passwordEncoder);
+        memberRepository.save(memberLoggedIn);
         return new MypageResponsDto(memberLoggedIn);
     }
 }
