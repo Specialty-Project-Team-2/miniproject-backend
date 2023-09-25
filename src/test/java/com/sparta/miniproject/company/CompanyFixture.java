@@ -8,6 +8,7 @@ public class CompanyFixture {
         entity.setCompanyName("mock companyName1");
         entity.setLocation("mock location1");
         entity.setSales("mock sales1");
+        entity.setLogoUrl("mock logo");
         return entity;
     }
 
@@ -16,6 +17,7 @@ public class CompanyFixture {
         entity.setCompanyName("mock companyName2");
         entity.setLocation("mock location2");
         entity.setSales("mock sales2");
+        entity.setLogoUrl("mock logo");
         return entity;
     }
 

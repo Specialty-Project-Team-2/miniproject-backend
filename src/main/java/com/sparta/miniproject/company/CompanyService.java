@@ -21,8 +21,8 @@ public class CompanyService {
                         .build());
     }
 
-    public Page<CompanyCardResponseDto> readAll(Pageable pageable) {
-        return companyRepository.findAll(pageable)
+    public Page<CompanyCardResponseDto> readAll(String company, Pageable pageable) {
+        return companyRepository.searchAllBy(company, pageable)
                 .map(CompanyCardResponseDto::fromEntity);
     }
 }

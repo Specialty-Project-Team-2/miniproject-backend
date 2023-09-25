@@ -36,6 +36,9 @@ public class AuthorizeHttpRequestsConfig {
 
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/company/*/comment")).permitAll()
 
+                // 카카오 인증 관련 API
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/user/kakao/callback")).permitAll()
+
                 // 정적 리소스 경로 허용
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll();
     }

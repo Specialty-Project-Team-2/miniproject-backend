@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -27,7 +26,6 @@ import static com.sparta.miniproject.common.jwtutil.JwtUtil.AUTHORIZATION_HEADER
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
-    private final AccessDeniedHandler accessDeniedHandler;
 
     @Override
     protected void doFilterInternal(
@@ -54,6 +52,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             // 토큰 해석 실패는 있을 수 있는 일이므로 별다른 처리는 하지 않음.
 
         } catch (AccessDeniedException ex) {
+            // 위조된 토큰이거나 만료된 토큰.
 
         } finally {
             filterChain.doFilter(request, response);

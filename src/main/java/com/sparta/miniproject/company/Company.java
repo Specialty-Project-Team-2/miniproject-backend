@@ -19,4 +19,7 @@ public class Company {
 
     @Column(name = "sales")
     private String sales;
+
+    @Column(name = "logo")
+    private String logoUrl;
 }

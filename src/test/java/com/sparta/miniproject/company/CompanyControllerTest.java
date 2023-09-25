@@ -62,6 +62,7 @@ class CompanyControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.companyName").hasJsonPath())
                 .andExpect(jsonPath("$.location").hasJsonPath())
+                .andExpect(jsonPath("$.logoUrl").hasJsonPath())
                 .andExpect(jsonPath("$.sales").hasJsonPath());
     }
 
@@ -95,7 +96,7 @@ class CompanyControllerTest {
         // given
         String urlForTest = "/api/company";
 
-        when(companyService.readAll(any())).thenReturn(
+        when(companyService.readAll(any(), any())).thenReturn(
                 new PageImpl<>(CompanyFixture.caseList1())
                         .map(CompanyCardResponseDto::fromEntity)
         );
@@ -105,6 +106,7 @@ class CompanyControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[*].companyName").hasJsonPath())
+                .andExpect(jsonPath("$.content[*].logoUrl").hasJsonPath())
                 .andExpect(jsonPath("$.content[*].location").hasJsonPath());
     }
 
@@ -115,7 +117,7 @@ class CompanyControllerTest {
         // given
         String urlForTest = "/api/company";
 
-        when(companyService.readAll(any())).thenReturn(
+        when(companyService.readAll(any(), any())).thenReturn(
                 new PageImpl<>(CompanyFixture.caseList1())
                         .map(CompanyCardResponseDto::fromEntity)
         );
@@ -130,6 +132,7 @@ class CompanyControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[*].companyName").hasJsonPath())
+                .andExpect(jsonPath("$.content[*].logoUrl").hasJsonPath())
                 .andExpect(jsonPath("$.content[*].location").hasJsonPath());
     }
 }
