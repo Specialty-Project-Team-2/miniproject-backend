@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -23,11 +22,7 @@ public class CorsConfig {
 
     @Bean
     @Profile("test")
-    public Customizer<CorsConfigurer<HttpSecurity>> corsConfigurerCustomizer() {
-        return builder -> builder.configurationSource(corsConfigurationSourceForTest());
-    }
-
-    private CorsConfigurationSource corsConfigurationSourceForTest() {
+    public Customizer<CorsConfigurer<HttpSecurity>> corsConfigurationSourceForTest() {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
@@ -42,21 +37,19 @@ public class CorsConfig {
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-        return source;
+
+        return builder -> builder.configurationSource(source);
     }
 
     @Bean
     @Profile("prod")
-    public Customizer<CorsConfigurer<HttpSecurity>> corsConfigurerCustomizerInProd() {
-        return builder -> builder.configurationSource(corsConfigurationSourceForProd());
-    }
-
-    private CorsConfigurationSource corsConfigurationSourceForProd() {
+    public Customizer<CorsConfigurer<HttpSecurity>> corsConfigurationSourceForProd() {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of(
-                serverProperties.getFrontendServerUrl()
+                serverProperties.getFrontendServerUrl(),
+                "http://localhost:3000"
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
@@ -65,7 +58,8 @@ public class CorsConfig {
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-        return source;
+
+        return builder -> builder.configurationSource(source);
     }
 
     @Bean

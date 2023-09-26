@@ -51,6 +51,12 @@ public class AuthorizeHttpRequestsConfig {
     }
 
     @Bean
+    @Profile("test")
+    public CustomizerAnyRequest customizerInTest() {
+        return request -> request.anyRequest().permitAll();
+    }
+
+    @Bean
     @Profile({"prod"})
     public CustomizerAnyRequest customizerInProd() {
         return request -> request.anyRequest().authenticated();
