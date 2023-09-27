@@ -18,13 +18,10 @@ public class H2DbConfig {
     }
 
     @Bean
-    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> customizerInTest() {
+    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> RequestMatchersCustomizer() {
         return request -> {
             // H2 DB를 위한 설정
             request.requestMatchers(PathRequest.toH2Console()).permitAll();
-
-            // 개발을 위해 미지의 요청에 대해 모두 허용
-            request.anyRequest().permitAll();
         };
     }
 }

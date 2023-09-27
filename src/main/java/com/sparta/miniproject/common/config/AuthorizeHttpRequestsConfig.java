@@ -1,5 +1,6 @@
 package com.sparta.miniproject.common.config;
 
+import com.sparta.miniproject.common.config.container.CustomizerAnyRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -22,13 +23,13 @@ public class AuthorizeHttpRequestsConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/signup")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/login")).permitAll()
 
-                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/mypage/*")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/member/*")).permitAll()
 
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/api/member/me")).authenticated()
 
                 // Company Entity 관련 API
-                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/detail/*")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/company/*")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/company")).permitAll()
 
                 // Comment Entity 관련 API
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/comment/**")).permitAll()
@@ -45,13 +46,19 @@ public class AuthorizeHttpRequestsConfig {
 
     @Bean
     @Profile("local")
-    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> customizerInLocal() {
+    public CustomizerAnyRequest customizerInLocal() {
+        return request -> request.anyRequest().permitAll();
+    }
+
+    @Bean
+    @Profile("test")
+    public CustomizerAnyRequest customizerInTest() {
         return request -> request.anyRequest().permitAll();
     }
 
     @Bean
     @Profile({"prod"})
-    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> customizerInProd() {
+    public CustomizerAnyRequest customizerInProd() {
         return request -> request.anyRequest().authenticated();
     }
 }
