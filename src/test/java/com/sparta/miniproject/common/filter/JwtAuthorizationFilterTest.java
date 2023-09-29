@@ -1,7 +1,8 @@
 package com.sparta.miniproject.common.filter;
 
-import com.sparta.miniproject.common.jwtutil.JwtUtil;
-import com.sparta.miniproject.member.repository.MemberRepository;
+import com.sparta.miniproject.utils.JwtUtil;
+import com.sparta.miniproject.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.repository.MemberRepository;
 import com.sparta.miniproject.tool.ApplicationContextSupplier;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

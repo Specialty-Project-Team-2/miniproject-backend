@@ -1,6 +1,9 @@
 package com.sparta.miniproject.company;
 
-import com.sparta.miniproject.common.exception.JobException;
+import com.sparta.miniproject.dto.CompanyResponseDto;
+import com.sparta.miniproject.exception.JobException;
+import com.sparta.miniproject.repository.CompanyRepository;
+import com.sparta.miniproject.service.CompanyService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

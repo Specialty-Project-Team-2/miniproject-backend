@@ -1,5 +1,8 @@
 package com.sparta.miniproject.company;
 
+import com.sparta.miniproject.entity.Company;
+import com.sparta.miniproject.repository.CompanyRepository;
+import com.sparta.miniproject.repository.CompanyRepositoryImpl;
 import com.sparta.miniproject.tool.EnableQuerydslTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;

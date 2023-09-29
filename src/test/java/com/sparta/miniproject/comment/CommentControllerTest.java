@@ -1,7 +1,12 @@
 package com.sparta.miniproject.comment;
 
-import com.sparta.miniproject.common.dto.CodeResponseDto;
-import com.sparta.miniproject.common.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.controller.CommentController;
+import com.sparta.miniproject.dto.CodeResponseDto;
+import com.sparta.miniproject.dto.CommentCreateRequestDto;
+import com.sparta.miniproject.dto.CommentResponseDto;
+import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.service.CommentService;
 import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

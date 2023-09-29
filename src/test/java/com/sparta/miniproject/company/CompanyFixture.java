@@ -1,5 +1,7 @@
 package com.sparta.miniproject.company;
 
+import com.sparta.miniproject.entity.Company;
+
 import java.util.List;
 
 public class CompanyFixture {

@@ -1,6 +1,6 @@
 package com.sparta.miniproject.tool;
 
-import com.sparta.miniproject.common.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.filter.JwtAuthorizationFilter;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;

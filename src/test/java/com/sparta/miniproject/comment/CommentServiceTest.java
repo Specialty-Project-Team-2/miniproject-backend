@@ -1,13 +1,19 @@
 package com.sparta.miniproject.comment;
 
-import com.sparta.miniproject.common.dto.CodeResponseDto;
-import com.sparta.miniproject.common.exception.JobException;
-import com.sparta.miniproject.common.exception.MessageSourceUtil;
-import com.sparta.miniproject.common.util.SecurityUtil;
+import com.sparta.miniproject.dto.CodeResponseDto;
+import com.sparta.miniproject.dto.CommentCreateRequestDto;
+import com.sparta.miniproject.dto.CommentResponseDto;
+import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.entity.Comment;
+import com.sparta.miniproject.exception.JobException;
+import com.sparta.miniproject.exception.MessageSourceUtil;
+import com.sparta.miniproject.repository.CommentRepository;
+import com.sparta.miniproject.service.CommentService;
+import com.sparta.miniproject.utils.SecurityUtil;
 import com.sparta.miniproject.company.CompanyFixture;
-import com.sparta.miniproject.company.CompanyRepository;
+import com.sparta.miniproject.repository.CompanyRepository;
 import com.sparta.miniproject.member.MemberFixture;
-import com.sparta.miniproject.member.entity.Member;
+import com.sparta.miniproject.entity.Member;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,6 @@
 package com.sparta.miniproject.member;
 
-import com.sparta.miniproject.member.entity.Member;
+import com.sparta.miniproject.entity.Member;
 
 public class MemberFixture {
     public static Member case1() {

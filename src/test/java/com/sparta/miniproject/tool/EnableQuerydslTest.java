@@ -1,6 +1,6 @@
 package com.sparta.miniproject.tool;
 
-import com.sparta.miniproject.common.config.QuerydslConfig;
+import com.sparta.miniproject.config.QuerydslConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
