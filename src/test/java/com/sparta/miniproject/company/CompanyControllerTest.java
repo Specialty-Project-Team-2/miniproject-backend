@@ -80,10 +80,7 @@ class CompanyControllerTest {
         HttpStatus status = HttpStatus.CONFLICT;
 
         when(companyService.readById(any())).thenThrow(
-                JobException.builder()
-                        .msg("sentence.for.test")
-                        .status(status)
-                        .build()
+                JobException.from(status, "sentence.for.test")
         );
 
         // when & then

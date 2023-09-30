@@ -58,40 +58,26 @@ public class CommentService {
         commentRepository.delete(entity);
 
         String message = source.interpretErrorMessage("comment.delete.success");
-        return CodeResponseDto.builder()
-                .msg(message)
-                .build();
+        return CodeResponseDto.fromMsg(message);
     }
 
     private Comment findById(Long id) {
         return commentRepository.findById(id)
-                .orElseThrow(() -> JobException.builder()
-                        .msg("comment.read.not_found")
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build());
+                .orElseThrow(() -> JobException.from(HttpStatus.BAD_REQUEST, "comment.read.not_found"));
     }
 
     private Company findCompanyById(Long id) {
         return companyRepository.findById(id)
-                .orElseThrow(() -> JobException.builder()
-                        .msg("company.read.not_found")
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build());
+                .orElseThrow(() -> JobException.from(HttpStatus.BAD_REQUEST, "company.read.not_found"));
     }
 
     private static void validateOwnerShipOfComment(Member memberLoggedIn, Member memberWhoOwnedThis) {
         if(memberLoggedIn == null) {
-            throw JobException.builder()
-                    .msg("authentication.empty")
-                    .status(HttpStatus.UNAUTHORIZED)
-                    .build();
+            throw JobException.from(HttpStatus.UNAUTHORIZED, "authentication.empty");
         }
 
         if(memberLoggedIn.getId() != memberWhoOwnedThis.getId()) {
-            throw JobException.builder()
-                    .msg("comment.access.denied")
-                    .status(HttpStatus.FORBIDDEN)
-                    .build();
+            throw JobException.from(HttpStatus.FORBIDDEN, "comment.access.denied");
         }
     }
 

@@ -6,8 +6,11 @@ import lombok.Getter;
 public class MemberResponseDto {
     private String msg;
 
-
-    public MemberResponseDto(String msg) {
+    private MemberResponseDto(String msg) {
         this.msg = msg;
+    }
+
+    public static MemberResponseDto fromMsg(String msg) {
+        return new MemberResponseDto(msg);
     }
 }

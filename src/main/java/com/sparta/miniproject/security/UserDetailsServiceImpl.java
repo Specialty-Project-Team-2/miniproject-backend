@@ -19,10 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member principal = memberRepository.findByEmail(username)
-                .orElseThrow(() -> JobException.builder()
-                        .msg("login.email.not_same")
-                        .status(HttpStatus.NOT_FOUND)
-                        .build());
+                .orElseThrow(() -> JobException.from(HttpStatus.NOT_FOUND, "login.email.not_same"));
         return new UserDetailsImpl(principal);
     }
 }

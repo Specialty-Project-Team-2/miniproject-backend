@@ -18,10 +18,7 @@ public class CompanyService {
     public CompanyResponseDto readById(Long companyId) {
         return companyRepository.findById(companyId)
                 .map(CompanyResponseDto::fromEntity)
-                .orElseThrow(() -> JobException.builder()
-                        .msg("company.read.not_found")
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build());
+                .orElseThrow(() -> JobException.from(HttpStatus.BAD_REQUEST, "company.read.not_found"));
     }
 
     public Page<CompanyCardResponseDto> readAll(String company, Pageable pageable) {

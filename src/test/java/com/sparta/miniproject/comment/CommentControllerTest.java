@@ -1,11 +1,15 @@
 package com.sparta.miniproject.comment;
 
+import com.sparta.miniproject.company.CompanyFixture;
 import com.sparta.miniproject.controller.CommentController;
 import com.sparta.miniproject.dto.CodeResponseDto;
 import com.sparta.miniproject.dto.CommentCreateRequestDto;
 import com.sparta.miniproject.dto.CommentResponseDto;
 import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.entity.Company;
+import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.member.MemberFixture;
 import com.sparta.miniproject.service.CommentService;
 import com.sparta.miniproject.util.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;
@@ -56,13 +60,11 @@ class CommentControllerTest {
         // given
         String urlForTest = "/api/company/1/comment";
         CommentCreateRequestDto request = new CommentCreateRequestDto();
+        Company company = CompanyFixture.caseWhichRegisteredAtFirst();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         when(commentService.create(any(), any())).thenReturn(
-                CommentResponseDto.builder()
-                        .comment("mock comment1")
-                        .nickname("mock nickname1")
-                        .companyId(1L)
-                        .build()
+                CommentResponseDto.fromEntity(CommentFixture.caseWhichMadeFirst(company, member))
         );
 
         // when & then
@@ -84,13 +86,11 @@ class CommentControllerTest {
         Long id = 1L;
         String urlForTest = String.format("/api/comment/%s", id);
         CommentUpdateRequestDto request = new CommentUpdateRequestDto();
+        Company company = CompanyFixture.caseWhichRegisteredAtFirst();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         when(commentService.update(any(), any(), any())).thenReturn(
-                CommentResponseDto.builder()
-                        .comment("mock comment1")
-                        .nickname("mock nickname1")
-                        .companyId(1L)
-                        .build()
+                CommentResponseDto.fromEntity(CommentFixture.caseWhichMadeFirst(company, member))
         );
 
         // when & then
@@ -113,9 +113,7 @@ class CommentControllerTest {
         String urlForTest = String.format("/api/comment/%s", id);
 
         when(commentService.deleteById(any(), any())).thenReturn(
-                CodeResponseDto.builder()
-                        .msg("테스트를 위한 문장")
-                        .build()
+                CodeResponseDto.fromMsg("테스트를 위한 문장")
         );
 
         // when & then

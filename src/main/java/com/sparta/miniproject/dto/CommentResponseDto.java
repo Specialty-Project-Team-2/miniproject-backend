@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Getter @Builder(toBuilder = true) @RequiredArgsConstructor
+@Getter @RequiredArgsConstructor
 public class CommentResponseDto {
     private final Long id;
     private final String comment;
@@ -14,12 +14,12 @@ public class CommentResponseDto {
     private final Long companyId;
 
     public static CommentResponseDto fromEntity(Comment entity) {
-        return CommentResponseDto.builder()
-                .id(entity.getId())
-                .comment(entity.getComment())
-                .nickname(entity.getMember().getNickname())
-                .memberId(entity.getMember().getId())
-                .companyId(entity.getCompany().getId())
-                .build();
+        return new CommentResponseDto(
+                entity.getId(),
+                entity.getComment(),
+                entity.getMember().getNickname(),
+                entity.getMember().getId(),
+                entity.getCompany().getId()
+        );
     }
 }

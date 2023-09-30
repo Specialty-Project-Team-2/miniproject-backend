@@ -30,26 +30,20 @@ public class MemberService {
 
         Optional<Member> checkNickname = memberRepository.findByNickname(nickname);
         if (checkNickname.isPresent()) {
-            throw JobException.builder()
-                    .msg("signup.nickname.same")
-                    .status(HttpStatus.BAD_REQUEST)
-                    .build();
+            throw JobException.from(HttpStatus.BAD_REQUEST, "signup.nickname.same");
         }
 
         String email = signupRequestDto.getEmail();
         Optional<Member> checkEmail = memberRepository.findByEmail(email);
         if (checkEmail.isPresent()) {
-            throw JobException.builder()
-                    .msg("signup.email.same")
-                    .status(HttpStatus.BAD_REQUEST)
-                    .build();
+            throw JobException.from(HttpStatus.BAD_REQUEST, "signup.email.same");
         }
 
         Member member = new Member(email, password, nickname);
         memberRepository.save(member);
 
         String message = source.interpretErrorMessage("signup.success");
-        return new MemberResponseDto(message);
+        return MemberResponseDto.fromMsg(message);
     }
 
     @Transactional
@@ -58,17 +52,11 @@ public class MemberService {
         String password = loginRequestDto.getPassword();
 
         Member member = memberRepository.findByEmail(email).orElseThrow(
-                () -> JobException.builder()
-                        .msg("login.email.not_same")
-                        .status(HttpStatus.UNAUTHORIZED)
-                        .build()
+                () -> JobException.from(HttpStatus.UNAUTHORIZED, "login.email.not_same")
         );
 
         if (!passwordEncoder.matches(password, member.getPassword())) {
-            throw JobException.builder()
-                    .msg("login.password.not_same")
-                    .status(HttpStatus.UNAUTHORIZED)
-                    .build();
+            throw JobException.from(HttpStatus.UNAUTHORIZED, "login.password.not_same");
         }
 
         String token = jwtUtil.createToken(member);
@@ -80,19 +68,16 @@ public class MemberService {
     public MypageResponsDto mypage(Long memberid) {
 
         Member member = memberRepository.findById(memberid).orElseThrow(
-                () -> JobException.builder()
-                        .msg("mypage.not_found")
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build()
+                () -> JobException.from(HttpStatus.BAD_REQUEST, "mypage.not_found")
         );
-        return new MypageResponsDto(member.getId(), member.getEmail(), member.getNickname());
+        return MypageResponsDto.fromEntity(member);
     }
 
     @Transactional
     public MypageResponsDto mypageUpdate(MemberRequestDto memberRequestDto, Member memberLoggedIn) {
         memberLoggedIn.update(memberRequestDto, passwordEncoder);
         memberRepository.save(memberLoggedIn);
-        return new MypageResponsDto(memberLoggedIn);
+        return MypageResponsDto.fromEntity(memberLoggedIn);
     }
 }
 

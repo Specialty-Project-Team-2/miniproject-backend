@@ -24,9 +24,7 @@ public class GlobalExceptionControllerAdvice {
 
         String messageToClient = source.interpretErrorMessage(ex.getMsg());
         log.warn(messageToClient);
-        return ErrorResponseDto.builder()
-                .msg(messageToClient)
-                .build();
+        return ErrorResponseDto.fromMsg(messageToClient);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -35,9 +33,7 @@ public class GlobalExceptionControllerAdvice {
 
         String messageToClient = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         log.warn(messageToClient);
-        return ErrorResponseDto.builder()
-                .msg(messageToClient)
-                .build();
+        return ErrorResponseDto.fromMsg(messageToClient);
     }
 
     @ExceptionHandler(Throwable.class)
@@ -48,8 +44,6 @@ public class GlobalExceptionControllerAdvice {
         Arrays.stream(ex.getStackTrace())
                 .map(StackTraceElement::toString)
                 .forEach(log::warn);
-        return ErrorResponseDto.builder()
-                .msg(messageToClient)
-                .build();
+        return ErrorResponseDto.fromMsg(messageToClient);
     }
 }

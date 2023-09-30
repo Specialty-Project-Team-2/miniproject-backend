@@ -26,10 +26,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     ) throws IOException {
         String message = source.interpretErrorMessage("access.denied");
 
-        ErrorResponseDto responseDto = ErrorResponseDto.builder()
-                .msg(message)
-                .build();
-
+        ErrorResponseDto responseDto = ErrorResponseDto.fromMsg(message);
         response.setStatus(HttpStatus.FORBIDDEN.value());
 
         try (PrintWriter writer = response.getWriter()) {

@@ -33,6 +33,7 @@ public class KakaoService {
     private final RestTemplate restTemplate;
     private final JwtUtil jwtUtil;
     private final KakaoOAuth2Properties kakaoOAuth2Properties;
+    private final ObjectMapper objectMapper;
 
     public String kakaoLogin(String code) throws JsonProcessingException {
         String accessToken = getToken(code);
@@ -94,14 +95,8 @@ public class KakaoService {
                 String.class
         );
 
-        JsonNode jsonNode = new ObjectMapper().readTree(response.getBody());
-        Long id = jsonNode.get("id").asLong();
-        String nickname = jsonNode.get("properties")
-                .get("nickname").asText();
-        String email = jsonNode.get("kakao_account")
-                .get("email").asText();
-
-        return new KakaoUserInfoDto(id, nickname, email);
+        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+        return KakaoUserInfoDto.fromJson(jsonNode);
     }
 
     private Member registerKakaoUserIfNeeded(KakaoUserInfoDto kakaoUserInfo) {

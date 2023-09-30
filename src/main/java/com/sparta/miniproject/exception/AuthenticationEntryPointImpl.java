@@ -28,10 +28,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     ) throws IOException {
         String message = source.interpretErrorMessage("authentication.empty");
 
-        ErrorResponseDto responseDto = ErrorResponseDto.builder()
-                .msg(message)
-                .build();
-
+        ErrorResponseDto responseDto = ErrorResponseDto.fromMsg(message);
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
         try (PrintWriter writer = response.getWriter()) {
