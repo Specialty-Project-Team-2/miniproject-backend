@@ -3,6 +3,7 @@ package com.sparta.miniproject.service;
 import com.sparta.miniproject.dto.*;
 import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.exception.JobException;
+import com.sparta.miniproject.exception.MessageSourceUtil;
 import com.sparta.miniproject.repository.MemberRepository;
 import com.sparta.miniproject.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final MessageSourceUtil source;
 
     @Transactional
     public MemberResponseDto signup(SignupRequestDto signupRequestDto) {
@@ -45,7 +47,9 @@ public class MemberService {
 
         Member member = new Member(email, password, nickname);
         memberRepository.save(member);
-        return new MemberResponseDto("회원 가입을 축하합니다");
+
+        String message = source.interpretErrorMessage("signup.success");
+        return new MemberResponseDto(message);
     }
 
     @Transactional
@@ -68,7 +72,9 @@ public class MemberService {
         }
 
         String token = jwtUtil.createToken(member);
-        return new LoginResponseDto("로그인을 축하합니다", token);
+
+        String message = source.interpretErrorMessage("login.success");
+        return new LoginResponseDto(message, token);
     }
 
     public MypageResponsDto mypage(Long memberid) {

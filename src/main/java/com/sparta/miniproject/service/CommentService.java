@@ -1,17 +1,16 @@
 package com.sparta.miniproject.service;
 
+import com.sparta.miniproject.dto.CodeResponseDto;
 import com.sparta.miniproject.dto.CommentCreateRequestDto;
 import com.sparta.miniproject.dto.CommentResponseDto;
 import com.sparta.miniproject.dto.CommentUpdateRequestDto;
-import com.sparta.miniproject.dto.CodeResponseDto;
 import com.sparta.miniproject.entity.Comment;
+import com.sparta.miniproject.entity.Company;
+import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.exception.MessageSourceUtil;
 import com.sparta.miniproject.repository.CommentRepository;
-import com.sparta.miniproject.utils.SecurityUtil;
-import com.sparta.miniproject.entity.Company;
 import com.sparta.miniproject.repository.CompanyRepository;
-import com.sparta.miniproject.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +43,7 @@ public class CommentService {
     public CommentResponseDto update(Long commentId, CommentUpdateRequestDto request, Member principal) {
         Comment entity = findById(commentId);
 
-        isThisYours(entity.getMember());
+        validateOwnerShipOfComment(principal, entity.getMember());
 
         request.overwriteTo(entity);
         return CommentResponseDto.fromEntity(entity);
@@ -54,7 +53,7 @@ public class CommentService {
     public CodeResponseDto deleteById(Long commentId, Member principal) {
         Comment entity = findById(commentId);
 
-        isThisYours(entity.getMember());
+        validateOwnerShipOfComment(principal, entity.getMember());
 
         commentRepository.delete(entity);
 
@@ -80,16 +79,15 @@ public class CommentService {
                         .build());
     }
 
-    private static void isThisYours(Member memberWhoOwnedThis) {
-        Member memberLoggedIn = SecurityUtil.getMemberLoggedIn()
-                .orElseThrow(() ->
-                        JobException.builder()
-                                .msg("authentication.empty")
-                                .status(HttpStatus.UNAUTHORIZED)
-                                .build()
-                        );
+    private static void validateOwnerShipOfComment(Member memberLoggedIn, Member memberWhoOwnedThis) {
+        if(memberLoggedIn == null) {
+            throw JobException.builder()
+                    .msg("authentication.empty")
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .build();
+        }
 
-        if(!(memberLoggedIn.getId() == memberWhoOwnedThis.getId())) {
+        if(memberLoggedIn.getId() != memberWhoOwnedThis.getId()) {
             throw JobException.builder()
                     .msg("comment.access.denied")
                     .status(HttpStatus.FORBIDDEN)

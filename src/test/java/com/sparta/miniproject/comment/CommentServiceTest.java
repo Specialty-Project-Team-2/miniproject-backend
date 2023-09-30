@@ -115,12 +115,8 @@ class CommentServiceTest {
                 ))
         );
 
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.of(member)
-        );
-
         // when
-        CommentResponseDto result = commentService.update(companyId, request, null);
+        CommentResponseDto result = commentService.update(companyId, request, member);
 
         // then
         assertThat(result).isNotNull();
@@ -141,10 +137,6 @@ class CommentServiceTest {
 
         when(commentRepository.findById(any())).thenReturn(
                 Optional.empty()
-        );
-
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.of(member)
         );
 
         // when
@@ -171,10 +163,6 @@ class CommentServiceTest {
                         CompanyFixture.case1(),
                         member
                 ))
-        );
-
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.empty()
         );
 
         // when
@@ -204,10 +192,6 @@ class CommentServiceTest {
                 ))
         );
 
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.of(otherMember)
-        );
-
         // when
         Executable result = () -> commentService.update(companyId, request, otherMember);
 
@@ -228,10 +212,6 @@ class CommentServiceTest {
                         CompanyFixture.case1(),
                         member
                 ))
-        );
-
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.of(member)
         );
 
         // when
@@ -256,10 +236,6 @@ class CommentServiceTest {
                 ))
         );
 
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.empty()
-        );
-
         // when
         Executable result = () -> commentService.deleteById(companyId, null);
 
@@ -281,10 +257,6 @@ class CommentServiceTest {
                         CompanyFixture.case1(),
                         member
                 ))
-        );
-
-        when(SecurityUtil.getMemberLoggedIn()).thenReturn(
-                Optional.of(otherMember)
         );
 
         // when
