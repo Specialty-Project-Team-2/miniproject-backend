@@ -1,10 +1,11 @@
-package com.sparta.miniproject.company;
+package com.sparta.miniproject.controller;
 
 import com.sparta.miniproject.controller.CompanyController;
 import com.sparta.miniproject.dto.response.CompanyCardResponseDto;
 import com.sparta.miniproject.dto.response.CompanyResponseDto;
 import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
+import com.sparta.miniproject.fixture.CompanyFixture;
 import com.sparta.miniproject.service.CompanyService;
 import com.sparta.miniproject.util.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;

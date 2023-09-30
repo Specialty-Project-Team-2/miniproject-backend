@@ -1,4 +1,4 @@
-package com.sparta.miniproject.company;
+package com.sparta.miniproject.fixture;
 
 import com.sparta.miniproject.entity.Company;
 

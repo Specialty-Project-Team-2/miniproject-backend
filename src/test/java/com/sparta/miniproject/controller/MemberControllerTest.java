@@ -4,7 +4,7 @@ import com.sparta.miniproject.dto.request.MemberRequestDto;
 import com.sparta.miniproject.dto.response.MypageResponsDto;
 import com.sparta.miniproject.utils.MessageSourceUtil;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
-import com.sparta.miniproject.member.MemberFixture;
+import com.sparta.miniproject.fixture.MemberFixture;
 import com.sparta.miniproject.service.MemberService;
 import com.sparta.miniproject.util.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;

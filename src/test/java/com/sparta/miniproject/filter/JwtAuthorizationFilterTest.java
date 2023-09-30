@@ -1,4 +1,4 @@
-package com.sparta.miniproject.common.filter;
+package com.sparta.miniproject.filter;
 
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
 import com.sparta.miniproject.utils.JwtUtil;

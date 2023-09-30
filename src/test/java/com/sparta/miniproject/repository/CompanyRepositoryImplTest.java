@@ -1,4 +1,4 @@
-package com.sparta.miniproject.company;
+package com.sparta.miniproject.repository;
 
 import com.sparta.miniproject.entity.Company;
 import com.sparta.miniproject.repository.CompanyRepository;

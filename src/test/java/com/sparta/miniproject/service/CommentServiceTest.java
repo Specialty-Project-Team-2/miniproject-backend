@@ -1,4 +1,4 @@
-package com.sparta.miniproject.comment;
+package com.sparta.miniproject.service;
 
 import com.sparta.miniproject.dto.response.CodeResponseDto;
 import com.sparta.miniproject.dto.request.CommentCreateRequestDto;
@@ -6,13 +6,14 @@ import com.sparta.miniproject.dto.response.CommentResponseDto;
 import com.sparta.miniproject.dto.request.CommentUpdateRequestDto;
 import com.sparta.miniproject.entity.Comment;
 import com.sparta.miniproject.exception.JobException;
+import com.sparta.miniproject.fixture.CommentFixture;
 import com.sparta.miniproject.utils.MessageSourceUtil;
 import com.sparta.miniproject.repository.CommentRepository;
 import com.sparta.miniproject.service.CommentService;
 import com.sparta.miniproject.utils.SecurityUtil;
-import com.sparta.miniproject.company.CompanyFixture;
+import com.sparta.miniproject.fixture.CompanyFixture;
 import com.sparta.miniproject.repository.CompanyRepository;
-import com.sparta.miniproject.member.MemberFixture;
+import com.sparta.miniproject.fixture.MemberFixture;
 import com.sparta.miniproject.entity.Member;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

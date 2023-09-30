@@ -1,9 +1,7 @@
-package com.sparta.miniproject.comment;
+package com.sparta.miniproject.fixture;
 
 import com.sparta.miniproject.entity.Comment;
 import com.sparta.miniproject.entity.Company;
-import com.sparta.miniproject.company.CompanyFixture;
-import com.sparta.miniproject.member.MemberFixture;
 import com.sparta.miniproject.entity.Member;
 
 import java.util.List;

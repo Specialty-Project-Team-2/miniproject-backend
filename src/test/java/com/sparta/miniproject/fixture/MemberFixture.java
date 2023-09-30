@@ -1,4 +1,4 @@
-package com.sparta.miniproject.member;
+package com.sparta.miniproject.fixture;
 
 import com.sparta.miniproject.entity.Member;
 
