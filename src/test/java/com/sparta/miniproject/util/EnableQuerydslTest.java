@@ -1,4 +1,4 @@
-package com.sparta.miniproject.tool;
+package com.sparta.miniproject.util;
 
 import com.sparta.miniproject.config.QuerydslConfig;
 import org.springframework.context.annotation.Import;

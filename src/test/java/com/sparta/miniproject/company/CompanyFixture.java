@@ -5,7 +5,7 @@ import com.sparta.miniproject.entity.Company;
 import java.util.List;
 
 public class CompanyFixture {
-    public static Company case1() {
+    public static Company caseWhichRegisteredAtFirst() {
         Company entity = new Company();
         entity.setCompanyName("mock companyName1");
         entity.setLocation("mock location1");
@@ -14,7 +14,7 @@ public class CompanyFixture {
         return entity;
     }
 
-    public static Company case2() {
+    public static Company caseWhichRegisteredAtSecond() {
         Company entity = new Company();
         entity.setCompanyName("mock companyName2");
         entity.setLocation("mock location2");
@@ -24,6 +24,6 @@ public class CompanyFixture {
     }
 
     public static List<Company> caseList1() {
-        return List.of(case1(), case2());
+        return List.of(caseWhichRegisteredAtFirst(), caseWhichRegisteredAtSecond());
     }
 }

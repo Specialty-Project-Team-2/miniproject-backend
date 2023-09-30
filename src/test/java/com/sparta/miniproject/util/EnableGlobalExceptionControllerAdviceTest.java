@@ -1,4 +1,4 @@
-package com.sparta.miniproject.tool;
+package com.sparta.miniproject.util;
 
 import com.sparta.miniproject.exception.GlobalExceptionControllerAdvice;
 import com.sparta.miniproject.exception.MessageSourceUtil;

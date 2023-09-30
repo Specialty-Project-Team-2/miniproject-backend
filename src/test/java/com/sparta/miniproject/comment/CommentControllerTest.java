@@ -7,7 +7,7 @@ import com.sparta.miniproject.dto.CommentResponseDto;
 import com.sparta.miniproject.dto.CommentUpdateRequestDto;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
 import com.sparta.miniproject.service.CommentService;
-import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
+import com.sparta.miniproject.util.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,7 +20,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.sparta.miniproject.tool.ProxyTestRequest.*;
+import static com.sparta.miniproject.util.ProxyTestRequest.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

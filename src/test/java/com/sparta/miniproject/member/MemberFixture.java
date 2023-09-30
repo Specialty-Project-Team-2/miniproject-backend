@@ -3,7 +3,7 @@ package com.sparta.miniproject.member;
 import com.sparta.miniproject.entity.Member;
 
 public class MemberFixture {
-    public static Member case1() {
+    public static Member caseWhoLoggedIn() {
         Member entity = new Member();
         entity.setId(1L);
         entity.setEmail("iksadnorth@gmail.com");
@@ -12,7 +12,7 @@ public class MemberFixture {
         return entity;
     }
 
-    public static Member case2() {
+    public static Member caseWhoAccessIllegally() {
         Member entity = new Member();
         entity.setId(2L);
         entity.setEmail("iksadsouth@gmail.com");

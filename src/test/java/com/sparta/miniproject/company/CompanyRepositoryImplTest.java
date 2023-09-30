@@ -3,7 +3,7 @@ package com.sparta.miniproject.company;
 import com.sparta.miniproject.entity.Company;
 import com.sparta.miniproject.repository.CompanyRepository;
 import com.sparta.miniproject.repository.CompanyRepositoryImpl;
-import com.sparta.miniproject.tool.EnableQuerydslTest;
+import com.sparta.miniproject.util.EnableQuerydslTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class CompanyRepositoryImplTest {
     @Autowired
     private CompanyRepository companyRepository;
 
-    @LoadTestcase1
+    @LoadTestcase
     @Test
     @DisplayName("[정상 작동] 주어진 키워드에 맞는 데이터 꺼내오기.")
     void searchAllBy() {
@@ -55,7 +55,7 @@ class CompanyRepositoryImplTest {
         }
     }
 
-    @LoadTestcase1
+    @LoadTestcase
     @Test
     @DisplayName("[정상 작동] 키워드가 존재하지 않으면 전체 조회.")
     void searchAllByNoKeyword() {
@@ -76,7 +76,7 @@ class CompanyRepositoryImplTest {
         }
     }
 
-    @LoadTestcase1
+    @LoadTestcase
     @Test
     @DisplayName("[정상 작동] 그냥 일괄 조회")
     void readAll() {
@@ -96,7 +96,7 @@ class CompanyRepositoryImplTest {
         }
     }
 
-    @LoadTestcase1
+    @LoadTestcase
     @Test
     @DisplayName("[정상 작동] 페이징 테스트.")
     void searchAllByWithPageable() {
@@ -122,8 +122,8 @@ class CompanyRepositoryImplTest {
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
     @Sql(
-            scripts = {"classpath:testcase1-for-company-repository.sql"},
+            scripts = {"classpath:testcase-for-company-repository-impl-test.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
-    private @interface LoadTestcase1 {}
+    private @interface LoadTestcase {}
 }

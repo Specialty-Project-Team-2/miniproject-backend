@@ -1,39 +1,26 @@
 package com.sparta.miniproject.common.filter;
 
-import com.sparta.miniproject.utils.JwtUtil;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
-import com.sparta.miniproject.repository.MemberRepository;
-import com.sparta.miniproject.tool.ApplicationContextSupplier;
+import com.sparta.miniproject.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-@ApplicationContextSupplier
-@Import(JwtAuthorizationFilter.class)
-@MockBeans({
-        @MockBean(AccessDeniedHandler.class),
-        @MockBean(JwtUtil.class),
-        @MockBean(UserDetailsService.class),
-        @MockBean(MemberRepository.class)
-})
 class JwtAuthorizationFilterTest {
-    @Autowired
-    private JwtAuthorizationFilter jwtAuthorizationFilter;
+    private final UserDetailsService userDetailsService = mock(UserDetailsService.class);
+    private final JwtUtil jwtUtil = mock(JwtUtil.class);
+    private final JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(userDetailsService, jwtUtil);
 
     @Test
     @DisplayName("[정상 작동] 쿠키를 집어 넣을 때, 해당 쿠키를 제대로 꺼낼 수 있음.")

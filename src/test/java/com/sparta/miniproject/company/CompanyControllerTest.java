@@ -6,7 +6,7 @@ import com.sparta.miniproject.dto.CompanyResponseDto;
 import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
 import com.sparta.miniproject.service.CompanyService;
-import com.sparta.miniproject.tool.EnableGlobalExceptionControllerAdviceTest;
+import com.sparta.miniproject.util.EnableGlobalExceptionControllerAdviceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -57,7 +57,7 @@ class CompanyControllerTest {
         String urlForTest = String.format("/api/company/%s", id);
 
         when(companyService.readById(any())).thenReturn(
-                CompanyResponseDto.fromEntity(CompanyFixture.case1())
+                CompanyResponseDto.fromEntity(CompanyFixture.caseWhichRegisteredAtFirst())
         );
 
         // when & then

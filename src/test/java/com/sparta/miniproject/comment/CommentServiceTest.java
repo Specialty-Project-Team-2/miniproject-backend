@@ -56,16 +56,16 @@ class CommentServiceTest {
         CommentCreateRequestDto request = new CommentCreateRequestDto();
         request.setComment(comment);
 
-        Comment saved = CommentFixture.case1(
-                CompanyFixture.case1(),
-                MemberFixture.case1()
+        Comment saved = CommentFixture.caseWhichMadeFirst(
+                CompanyFixture.caseWhichRegisteredAtFirst(),
+                MemberFixture.caseWhoLoggedIn()
         );
 
         when(commentRepository.save(any())).thenReturn(
                 saved
         );
         when(companyRepository.findById(any())).thenReturn(
-                Optional.of(CompanyFixture.case1())
+                Optional.of(CompanyFixture.caseWhichRegisteredAtFirst())
         );
 
         // when
@@ -103,14 +103,14 @@ class CommentServiceTest {
         Long companyId = 1L;
         String comment = "댓글 내용";
 
-        Member member = MemberFixture.case1();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         CommentUpdateRequestDto request = new CommentUpdateRequestDto();
         request.setComment(comment);
 
         when(commentRepository.findById(any())).thenReturn(
-                Optional.of(CommentFixture.case1(
-                        CompanyFixture.case1(),
+                Optional.of(CommentFixture.caseWhichMadeFirst(
+                        CompanyFixture.caseWhichRegisteredAtFirst(),
                         member
                 ))
         );
@@ -130,7 +130,7 @@ class CommentServiceTest {
         Long companyId = 1L;
         String comment = "댓글 내용";
 
-        Member member = MemberFixture.case1();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         CommentUpdateRequestDto request = new CommentUpdateRequestDto();
         request.setComment(comment);
@@ -153,14 +153,14 @@ class CommentServiceTest {
         Long companyId = 1L;
         String comment = "댓글 내용";
 
-        Member member = MemberFixture.case1();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         CommentUpdateRequestDto request = new CommentUpdateRequestDto();
         request.setComment(comment);
 
         when(commentRepository.findById(any())).thenReturn(
-                Optional.of(CommentFixture.case1(
-                        CompanyFixture.case1(),
+                Optional.of(CommentFixture.caseWhichMadeFirst(
+                        CompanyFixture.caseWhichRegisteredAtFirst(),
                         member
                 ))
         );
@@ -179,15 +179,15 @@ class CommentServiceTest {
         Long companyId = 1L;
         String comment = "댓글 내용";
 
-        Member member = MemberFixture.case1();
-        Member otherMember = MemberFixture.case2();
+        Member member = MemberFixture.caseWhoLoggedIn();
+        Member otherMember = MemberFixture.caseWhoAccessIllegally();
 
         CommentUpdateRequestDto request = new CommentUpdateRequestDto();
         request.setComment(comment);
 
         when(commentRepository.findById(any())).thenReturn(
-                Optional.of(CommentFixture.case1(
-                        CompanyFixture.case1(),
+                Optional.of(CommentFixture.caseWhichMadeFirst(
+                        CompanyFixture.caseWhichRegisteredAtFirst(),
                         member
                 ))
         );
@@ -205,11 +205,11 @@ class CommentServiceTest {
         // given
         Long companyId = 1L;
 
-        Member member = MemberFixture.case1();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         when(commentRepository.findById(any())).thenReturn(
-                Optional.of(CommentFixture.case1(
-                        CompanyFixture.case1(),
+                Optional.of(CommentFixture.caseWhichMadeFirst(
+                        CompanyFixture.caseWhichRegisteredAtFirst(),
                         member
                 ))
         );
@@ -227,11 +227,11 @@ class CommentServiceTest {
         // given
         Long companyId = 1L;
 
-        Member member = MemberFixture.case1();
+        Member member = MemberFixture.caseWhoLoggedIn();
 
         when(commentRepository.findById(any())).thenReturn(
-                Optional.of(CommentFixture.case1(
-                        CompanyFixture.case1(),
+                Optional.of(CommentFixture.caseWhichMadeFirst(
+                        CompanyFixture.caseWhichRegisteredAtFirst(),
                         member
                 ))
         );
@@ -249,12 +249,12 @@ class CommentServiceTest {
         // given
         Long companyId = 1L;
 
-        Member member = MemberFixture.case1();
-        Member otherMember = MemberFixture.case2();
+        Member member = MemberFixture.caseWhoLoggedIn();
+        Member otherMember = MemberFixture.caseWhoAccessIllegally();
 
         when(commentRepository.findById(any())).thenReturn(
-                Optional.of(CommentFixture.case1(
-                        CompanyFixture.case1(),
+                Optional.of(CommentFixture.caseWhichMadeFirst(
+                        CompanyFixture.caseWhichRegisteredAtFirst(),
                         member
                 ))
         );

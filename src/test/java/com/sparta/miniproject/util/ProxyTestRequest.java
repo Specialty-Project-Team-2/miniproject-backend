@@ -1,4 +1,4 @@
-package com.sparta.miniproject.tool;
+package com.sparta.miniproject.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

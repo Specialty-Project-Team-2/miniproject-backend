@@ -27,7 +27,7 @@ class CompanyServiceTest {
         Long companyId = 1L;
 
         when(companyRepository.findById(any())).thenReturn(
-                Optional.of(CompanyFixture.case1())
+                Optional.of(CompanyFixture.caseWhichRegisteredAtFirst())
         );
 
         // when
