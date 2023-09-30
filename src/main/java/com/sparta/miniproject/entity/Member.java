@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Table(name = "member")
+@Entity @Table(name = "member", indexes = @Index(columnList = "email"))
 @Getter @Setter @NoArgsConstructor
 public class Member {
 

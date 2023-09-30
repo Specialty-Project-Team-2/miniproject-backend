@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Entity @Table(name = "comment")
+@Entity @Table(name = "comment", indexes = @Index(columnList = "createdAt"))
 @Getter @Setter @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Comment extends Timestamped {
