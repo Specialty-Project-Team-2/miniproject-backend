@@ -11,8 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Arrays;
-
 @Slf4j
 @Component
 @RestControllerAdvice
@@ -44,9 +42,7 @@ public class GlobalExceptionControllerAdvice {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         String messageToClient = source.interpretErrorMessage("unexpected.error");
-        Arrays.stream(ex.getStackTrace())
-                .map(StackTraceElement::toString)
-                .forEach(log::warn);
+        ex.printStackTrace();
         return ErrorResponseDto.fromMsg(messageToClient);
     }
 }

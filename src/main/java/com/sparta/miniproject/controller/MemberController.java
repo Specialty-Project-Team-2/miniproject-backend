@@ -2,8 +2,8 @@ package com.sparta.miniproject.controller;
 
 import com.sparta.miniproject.dto.request.MemberRequestDto;
 import com.sparta.miniproject.dto.response.MypageResponsDto;
+import com.sparta.miniproject.security.UserDetailsImpl;
 import com.sparta.miniproject.service.MemberService;
-import com.sparta.miniproject.entity.Member;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,8 +22,8 @@ public class MemberController {
     @PutMapping("/api/member/me")
     public MypageResponsDto update(
             @Valid @RequestBody MemberRequestDto memberRequestDto,
-            @AuthenticationPrincipal Member principal
+            @AuthenticationPrincipal UserDetailsImpl principal
     ) {
-        return memberService.mypageUpdate(memberRequestDto, principal);
+        return memberService.mypageUpdate(memberRequestDto, principal.getMember());
     }
 }

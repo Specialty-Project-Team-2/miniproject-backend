@@ -1,10 +1,10 @@
 package com.sparta.miniproject.controller;
 
-import com.sparta.miniproject.dto.response.CodeResponseDto;
 import com.sparta.miniproject.dto.request.CommentCreateRequestDto;
-import com.sparta.miniproject.dto.response.CommentResponseDto;
 import com.sparta.miniproject.dto.request.CommentUpdateRequestDto;
-import com.sparta.miniproject.entity.Member;
+import com.sparta.miniproject.dto.response.CodeResponseDto;
+import com.sparta.miniproject.dto.response.CommentResponseDto;
+import com.sparta.miniproject.security.UserDetailsImpl;
 import com.sparta.miniproject.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,16 +45,16 @@ public class CommentController {
     public CommentResponseDto update(
             @PathVariable Long commentId,
             @RequestBody CommentUpdateRequestDto request,
-            @AuthenticationPrincipal Member principal
+            @AuthenticationPrincipal UserDetailsImpl principal
     ) {
-        return commentService.update(commentId, request, principal);
+        return commentService.update(commentId, request, principal.getMember());
     }
 
     @DeleteMapping("/api/comment/{commentId}")
     public CodeResponseDto delete(
             @PathVariable Long commentId,
-            @AuthenticationPrincipal Member principal
+            @AuthenticationPrincipal UserDetailsImpl principal
             ) {
-        return commentService.deleteById(commentId, principal);
+        return commentService.deleteById(commentId, principal.getMember());
     }
 }
