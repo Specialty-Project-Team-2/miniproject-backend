@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 import org.springframework.util.StringUtils;
 
 @UtilityClass
-public class CompanyQueryUtil {
+public class QueryUtil {
     public Predicate companyNameContains(QCompany company, String keyword) {
         return StringUtils.hasText(keyword) ? company.companyName.containsIgnoreCase(keyword) : null;
     }

@@ -1,7 +1,7 @@
 package com.sparta.miniproject.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sparta.miniproject.utils.CompanyQueryUtil;
+import com.sparta.miniproject.utils.QueryUtil;
 import com.sparta.miniproject.query.SearchCompanyRepository;
 import com.sparta.miniproject.entity.Company;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class CompanyRepositoryImpl implements SearchCompanyRepository {
         List<Company> result = factory
                 .select(company).from(company)
                 .where(
-                        CompanyQueryUtil.companyNameContains(company, keywordCompanyName)
+                        QueryUtil.companyNameContains(company, keywordCompanyName)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -35,7 +35,7 @@ public class CompanyRepositoryImpl implements SearchCompanyRepository {
         Long count = factory
                 .select(company.count()).from(company)
                 .where(
-                        CompanyQueryUtil.companyNameContains(company, keywordCompanyName)
+                        QueryUtil.companyNameContains(company, keywordCompanyName)
                 )
                 .fetchOne();
 
