@@ -18,6 +18,13 @@ public class ProxyTestRequest {
                 .with(csrf());
     }
 
+    public static MockHttpServletRequestBuilder putAsJson(String endPoint, Object request) throws JsonProcessingException {
+        return put(endPoint)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))
+                .with(csrf());
+    }
+
     public static MockHttpServletRequestBuilder patchAsJson(String endPoint, Object request) throws JsonProcessingException {
         return patch(endPoint)
                 .contentType(MediaType.APPLICATION_JSON)

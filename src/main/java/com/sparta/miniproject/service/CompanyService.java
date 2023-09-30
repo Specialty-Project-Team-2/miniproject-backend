@@ -1,7 +1,7 @@
 package com.sparta.miniproject.service;
 
-import com.sparta.miniproject.dto.CompanyCardResponseDto;
-import com.sparta.miniproject.dto.CompanyResponseDto;
+import com.sparta.miniproject.dto.response.CompanyCardResponseDto;
+import com.sparta.miniproject.dto.response.CompanyResponseDto;
 import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;

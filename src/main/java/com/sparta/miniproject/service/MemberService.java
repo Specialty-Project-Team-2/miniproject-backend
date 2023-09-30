@@ -1,9 +1,14 @@
 package com.sparta.miniproject.service;
 
-import com.sparta.miniproject.dto.*;
+import com.sparta.miniproject.dto.request.LoginRequestDto;
+import com.sparta.miniproject.dto.request.MemberRequestDto;
+import com.sparta.miniproject.dto.request.SignupRequestDto;
+import com.sparta.miniproject.dto.response.LoginResponseDto;
+import com.sparta.miniproject.dto.response.MemberResponseDto;
+import com.sparta.miniproject.dto.response.MypageResponsDto;
 import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.exception.JobException;
-import com.sparta.miniproject.exception.MessageSourceUtil;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import com.sparta.miniproject.repository.MemberRepository;
 import com.sparta.miniproject.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;

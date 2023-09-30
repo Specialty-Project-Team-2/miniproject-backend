@@ -1,14 +1,11 @@
-package com.sparta.miniproject.dto;
+package com.sparta.miniproject.dto.response;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Getter
+@Getter @RequiredArgsConstructor
 public class MemberResponseDto {
-    private String msg;
-
-    private MemberResponseDto(String msg) {
-        this.msg = msg;
-    }
+    private final String msg;
 
     public static MemberResponseDto fromMsg(String msg) {
         return new MemberResponseDto(msg);

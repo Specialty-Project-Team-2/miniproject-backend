@@ -2,10 +2,10 @@ package com.sparta.miniproject.comment;
 
 import com.sparta.miniproject.company.CompanyFixture;
 import com.sparta.miniproject.controller.CommentController;
-import com.sparta.miniproject.dto.CodeResponseDto;
-import com.sparta.miniproject.dto.CommentCreateRequestDto;
-import com.sparta.miniproject.dto.CommentResponseDto;
-import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.dto.response.CodeResponseDto;
+import com.sparta.miniproject.dto.request.CommentCreateRequestDto;
+import com.sparta.miniproject.dto.response.CommentResponseDto;
+import com.sparta.miniproject.dto.request.CommentUpdateRequestDto;
 import com.sparta.miniproject.entity.Company;
 import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.filter.JwtAuthorizationFilter;
@@ -59,7 +59,7 @@ class CommentControllerTest {
     void create() throws Exception {
         // given
         String urlForTest = "/api/company/1/comment";
-        CommentCreateRequestDto request = new CommentCreateRequestDto();
+        CommentCreateRequestDto request = new CommentCreateRequestDto("mock comment");
         Company company = CompanyFixture.caseWhichRegisteredAtFirst();
         Member member = MemberFixture.caseWhoLoggedIn();
 
@@ -85,7 +85,7 @@ class CommentControllerTest {
         // given
         Long id = 1L;
         String urlForTest = String.format("/api/comment/%s", id);
-        CommentUpdateRequestDto request = new CommentUpdateRequestDto();
+        CommentUpdateRequestDto request = new CommentUpdateRequestDto("mock comment");
         Company company = CompanyFixture.caseWhichRegisteredAtFirst();
         Member member = MemberFixture.caseWhoLoggedIn();
 

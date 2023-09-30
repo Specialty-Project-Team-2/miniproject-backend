@@ -1,21 +1,23 @@
-package com.sparta.miniproject.dto;
+package com.sparta.miniproject.dto.response;
 
 import com.sparta.miniproject.entity.Company;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter @RequiredArgsConstructor
-public final class CompanyCardResponseDto {
+public final class CompanyResponseDto {
     private final Long id;
     private final String companyName;
     private final String location;
+    private final String sales;
     private final String logoUrl;
 
-    public static CompanyCardResponseDto fromEntity(Company entity) {
-        return new CompanyCardResponseDto(
+    public static CompanyResponseDto fromEntity(Company entity) {
+        return new CompanyResponseDto(
                 entity.getId(),
                 entity.getCompanyName(),
                 entity.getLocation(),
+                entity.getSales(),
                 entity.getLogoUrl()
         );
     }

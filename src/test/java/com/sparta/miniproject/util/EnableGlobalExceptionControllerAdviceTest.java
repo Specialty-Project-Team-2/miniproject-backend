@@ -1,7 +1,7 @@
 package com.sparta.miniproject.util;
 
 import com.sparta.miniproject.exception.GlobalExceptionControllerAdvice;
-import com.sparta.miniproject.exception.MessageSourceUtil;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

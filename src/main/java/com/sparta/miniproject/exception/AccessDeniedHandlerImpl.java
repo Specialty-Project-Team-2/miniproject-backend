@@ -1,6 +1,8 @@
 package com.sparta.miniproject.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.miniproject.dto.response.ErrorResponseDto;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

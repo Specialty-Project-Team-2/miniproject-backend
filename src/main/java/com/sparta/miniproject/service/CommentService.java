@@ -1,14 +1,14 @@
 package com.sparta.miniproject.service;
 
-import com.sparta.miniproject.dto.CodeResponseDto;
-import com.sparta.miniproject.dto.CommentCreateRequestDto;
-import com.sparta.miniproject.dto.CommentResponseDto;
-import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.dto.response.CodeResponseDto;
+import com.sparta.miniproject.dto.request.CommentCreateRequestDto;
+import com.sparta.miniproject.dto.response.CommentResponseDto;
+import com.sparta.miniproject.dto.request.CommentUpdateRequestDto;
 import com.sparta.miniproject.entity.Comment;
 import com.sparta.miniproject.entity.Company;
 import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.exception.JobException;
-import com.sparta.miniproject.exception.MessageSourceUtil;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import com.sparta.miniproject.repository.CommentRepository;
 import com.sparta.miniproject.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;

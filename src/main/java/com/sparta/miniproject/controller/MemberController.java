@@ -1,7 +1,7 @@
 package com.sparta.miniproject.controller;
 
-import com.sparta.miniproject.dto.MemberRequestDto;
-import com.sparta.miniproject.dto.MypageResponsDto;
+import com.sparta.miniproject.dto.request.MemberRequestDto;
+import com.sparta.miniproject.dto.response.MypageResponsDto;
 import com.sparta.miniproject.service.MemberService;
 import com.sparta.miniproject.entity.Member;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.sparta.miniproject.exception;
+package com.sparta.miniproject.dto.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

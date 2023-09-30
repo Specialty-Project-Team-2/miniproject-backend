@@ -1,11 +1,11 @@
 package com.sparta.miniproject.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sparta.miniproject.dto.LoginRequestDto;
-import com.sparta.miniproject.dto.LoginResponseDto;
-import com.sparta.miniproject.dto.MemberResponseDto;
-import com.sparta.miniproject.dto.SignupRequestDto;
-import com.sparta.miniproject.exception.MessageSourceUtil;
+import com.sparta.miniproject.dto.request.LoginRequestDto;
+import com.sparta.miniproject.dto.response.LoginResponseDto;
+import com.sparta.miniproject.dto.response.MemberResponseDto;
+import com.sparta.miniproject.dto.request.SignupRequestDto;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import com.sparta.miniproject.service.KakaoService;
 import com.sparta.miniproject.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;

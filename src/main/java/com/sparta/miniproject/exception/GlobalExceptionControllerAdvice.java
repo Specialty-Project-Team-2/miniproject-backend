@@ -1,5 +1,7 @@
 package com.sparta.miniproject.exception;
 
+import com.sparta.miniproject.dto.response.ErrorResponseDto;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,7 @@ public class GlobalExceptionControllerAdvice {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
 
         String messageToClient = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        messageToClient = source.interpretErrorMessage(messageToClient);
         log.warn(messageToClient);
         return ErrorResponseDto.fromMsg(messageToClient);
     }

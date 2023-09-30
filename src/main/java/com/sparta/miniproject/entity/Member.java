@@ -1,6 +1,6 @@
 package com.sparta.miniproject.entity;
 
-import com.sparta.miniproject.dto.MemberRequestDto;
+import com.sparta.miniproject.dto.request.MemberRequestDto;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.Getter;

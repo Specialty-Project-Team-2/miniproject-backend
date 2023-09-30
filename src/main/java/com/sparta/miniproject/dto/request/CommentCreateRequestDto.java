@@ -1,13 +1,21 @@
-package com.sparta.miniproject.dto;
+package com.sparta.miniproject.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.sparta.miniproject.entity.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter
 public class CommentCreateRequestDto {
-    private String comment;
+    private final String comment;
+
+    @JsonCreator
+    public CommentCreateRequestDto(
+            String comment
+    ) {
+        this.comment = comment;
+    }
 
     public Comment toEntity() {
         Comment entity = new Comment();

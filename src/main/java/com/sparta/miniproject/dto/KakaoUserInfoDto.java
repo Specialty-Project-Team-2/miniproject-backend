@@ -3,19 +3,13 @@ package com.sparta.miniproject.dto;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@Getter
-@NoArgsConstructor
+@Getter @RequiredArgsConstructor
 public class KakaoUserInfoDto {
-    private Long id;
-    private String nickname;
-    private String email;
-
-    private KakaoUserInfoDto(Long id, String nickname, String email) {
-        this.id = id;
-        this.nickname = nickname;
-        this.email = email;
-    }
+    private final Long id;
+    private final String nickname;
+    private final String email;
 
     public static KakaoUserInfoDto fromJson(JsonNode json) {
         Long id = json.get("id")

@@ -1,12 +1,12 @@
 package com.sparta.miniproject.comment;
 
-import com.sparta.miniproject.dto.CodeResponseDto;
-import com.sparta.miniproject.dto.CommentCreateRequestDto;
-import com.sparta.miniproject.dto.CommentResponseDto;
-import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.dto.response.CodeResponseDto;
+import com.sparta.miniproject.dto.request.CommentCreateRequestDto;
+import com.sparta.miniproject.dto.response.CommentResponseDto;
+import com.sparta.miniproject.dto.request.CommentUpdateRequestDto;
 import com.sparta.miniproject.entity.Comment;
 import com.sparta.miniproject.exception.JobException;
-import com.sparta.miniproject.exception.MessageSourceUtil;
+import com.sparta.miniproject.utils.MessageSourceUtil;
 import com.sparta.miniproject.repository.CommentRepository;
 import com.sparta.miniproject.service.CommentService;
 import com.sparta.miniproject.utils.SecurityUtil;
@@ -53,8 +53,7 @@ class CommentServiceTest {
         Long companyId = 1L;
         String comment = "댓글 내용";
 
-        CommentCreateRequestDto request = new CommentCreateRequestDto();
-        request.setComment(comment);
+        CommentCreateRequestDto request = new CommentCreateRequestDto(comment);
 
         Comment saved = CommentFixture.caseWhichMadeFirst(
                 CompanyFixture.caseWhichRegisteredAtFirst(),
@@ -82,8 +81,7 @@ class CommentServiceTest {
         Long companyId = 1L;
         String comment = "댓글 내용";
 
-        CommentCreateRequestDto request = new CommentCreateRequestDto();
-        request.setComment(comment);
+        CommentCreateRequestDto request = new CommentCreateRequestDto(comment);
 
         when(companyRepository.findById(any())).thenReturn(
                 Optional.empty()
@@ -105,8 +103,7 @@ class CommentServiceTest {
 
         Member member = MemberFixture.caseWhoLoggedIn();
 
-        CommentUpdateRequestDto request = new CommentUpdateRequestDto();
-        request.setComment(comment);
+        CommentUpdateRequestDto request = new CommentUpdateRequestDto(comment);
 
         when(commentRepository.findById(any())).thenReturn(
                 Optional.of(CommentFixture.caseWhichMadeFirst(
@@ -132,8 +129,7 @@ class CommentServiceTest {
 
         Member member = MemberFixture.caseWhoLoggedIn();
 
-        CommentUpdateRequestDto request = new CommentUpdateRequestDto();
-        request.setComment(comment);
+        CommentUpdateRequestDto request = new CommentUpdateRequestDto(comment);
 
         when(commentRepository.findById(any())).thenReturn(
                 Optional.empty()
@@ -155,8 +151,7 @@ class CommentServiceTest {
 
         Member member = MemberFixture.caseWhoLoggedIn();
 
-        CommentUpdateRequestDto request = new CommentUpdateRequestDto();
-        request.setComment(comment);
+        CommentUpdateRequestDto request = new CommentUpdateRequestDto(comment);
 
         when(commentRepository.findById(any())).thenReturn(
                 Optional.of(CommentFixture.caseWhichMadeFirst(
@@ -182,8 +177,7 @@ class CommentServiceTest {
         Member member = MemberFixture.caseWhoLoggedIn();
         Member otherMember = MemberFixture.caseWhoAccessIllegally();
 
-        CommentUpdateRequestDto request = new CommentUpdateRequestDto();
-        request.setComment(comment);
+        CommentUpdateRequestDto request = new CommentUpdateRequestDto(comment);
 
         when(commentRepository.findById(any())).thenReturn(
                 Optional.of(CommentFixture.caseWhichMadeFirst(

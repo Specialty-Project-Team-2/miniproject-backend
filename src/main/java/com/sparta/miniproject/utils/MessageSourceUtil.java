@@ -1,4 +1,4 @@
-package com.sparta.miniproject.exception;
+package com.sparta.miniproject.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;

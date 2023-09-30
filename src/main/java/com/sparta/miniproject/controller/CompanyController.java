@@ -1,7 +1,7 @@
 package com.sparta.miniproject.controller;
 
-import com.sparta.miniproject.dto.CompanyCardResponseDto;
-import com.sparta.miniproject.dto.CompanyResponseDto;
+import com.sparta.miniproject.dto.response.CompanyCardResponseDto;
+import com.sparta.miniproject.dto.response.CompanyResponseDto;
 import com.sparta.miniproject.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

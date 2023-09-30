@@ -1,6 +1,6 @@
 package com.sparta.miniproject.company;
 
-import com.sparta.miniproject.dto.CompanyResponseDto;
+import com.sparta.miniproject.dto.response.CompanyResponseDto;
 import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.repository.CompanyRepository;
 import com.sparta.miniproject.service.CompanyService;

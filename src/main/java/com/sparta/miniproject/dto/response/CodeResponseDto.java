@@ -1,4 +1,4 @@
-package com.sparta.miniproject.dto;
+package com.sparta.miniproject.dto.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

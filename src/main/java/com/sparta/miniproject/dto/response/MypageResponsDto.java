@@ -1,14 +1,15 @@
-package com.sparta.miniproject.dto;
+package com.sparta.miniproject.dto.response;
 
 import com.sparta.miniproject.entity.Member;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Getter
+@Getter @RequiredArgsConstructor
 public class MypageResponsDto {
-    private Long id;
-    private String email;
-    private String nickname;
-    private String password;
+    private final Long id;
+    private final String email;
+    private final String nickname;
+    private final String password;
 
     private MypageResponsDto(Member entity) {
         this.id = entity.getId();

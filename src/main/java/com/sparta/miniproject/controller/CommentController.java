@@ -1,9 +1,9 @@
 package com.sparta.miniproject.controller;
 
-import com.sparta.miniproject.dto.CodeResponseDto;
-import com.sparta.miniproject.dto.CommentCreateRequestDto;
-import com.sparta.miniproject.dto.CommentResponseDto;
-import com.sparta.miniproject.dto.CommentUpdateRequestDto;
+import com.sparta.miniproject.dto.response.CodeResponseDto;
+import com.sparta.miniproject.dto.request.CommentCreateRequestDto;
+import com.sparta.miniproject.dto.response.CommentResponseDto;
+import com.sparta.miniproject.dto.request.CommentUpdateRequestDto;
 import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.service.CommentService;
 import lombok.RequiredArgsConstructor;
