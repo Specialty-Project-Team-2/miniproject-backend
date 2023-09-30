@@ -12,6 +12,7 @@ import com.sparta.miniproject.fixture.CompanyFixture;
 import com.sparta.miniproject.fixture.MemberFixture;
 import com.sparta.miniproject.service.CommentService;
 import com.sparta.miniproject.util.EnableGlobalExceptionControllerAdviceTest;
+import com.sparta.miniproject.util.WithMockPrincipal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -78,7 +79,7 @@ class CommentControllerTest {
                 .andExpect(jsonPath("$.companyId").hasJsonPath());
     }
 
-    @WithMockUser
+    @WithMockPrincipal
     @Test
     @DisplayName("[정상 작동] 댓글 수정")
     void update() throws Exception {
@@ -104,7 +105,7 @@ class CommentControllerTest {
                 .andExpect(jsonPath("$.companyId").hasJsonPath());
     }
 
-    @WithMockUser
+    @WithMockPrincipal
     @Test
     @DisplayName("[정상 작동] 댓글 삭제")
     void deleteMethod() throws Exception {
