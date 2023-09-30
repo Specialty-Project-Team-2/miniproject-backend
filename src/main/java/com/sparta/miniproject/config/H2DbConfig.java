@@ -13,15 +13,14 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 @Configuration
 public class H2DbConfig {
     @Bean
-    public Customizer<HeadersConfigurer<HttpSecurity>> headersCustomizer() {
-        return builder -> builder.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin);
-    }
+    public FilterChainRing configureH2DbConfig() {
+        return http -> http
+                .authorizeHttpRequests(b -> b
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+                )
 
-    @Bean
-    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> RequestMatchersCustomizer() {
-        return request -> {
-            // H2 DB를 위한 설정
-            request.requestMatchers(PathRequest.toH2Console()).permitAll();
-        };
+                .headers(b -> b
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+                );
     }
 }
