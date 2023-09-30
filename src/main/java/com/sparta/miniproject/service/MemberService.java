@@ -80,7 +80,7 @@ public class MemberService {
 
     @Transactional
     public MypageResponsDto mypageUpdate(MemberRequestDto memberRequestDto, Member memberLoggedIn) {
-        memberLoggedIn.update(memberRequestDto, passwordEncoder);
+        memberRequestDto.update(memberLoggedIn, passwordEncoder);
         memberRepository.save(memberLoggedIn);
         return MypageResponsDto.fromEntity(memberLoggedIn);
     }

@@ -108,7 +108,7 @@ public class KakaoService {
             Member sameEmailUser = memberRepository.findByEmail(kakaoEmail).orElse(null);
             if (sameEmailUser != null) {
                 kakaoUser = sameEmailUser;
-                kakaoUser = kakaoUser.kakaoIdUpdate(kakaoId);
+                kakaoUser.setKakaoId(kakaoId);
             } else {
                 String password = UUID.randomUUID().toString();
                 String encodedPassword = passwordEncoder.encode(password);
