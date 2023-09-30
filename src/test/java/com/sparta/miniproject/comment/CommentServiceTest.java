@@ -120,7 +120,7 @@ class CommentServiceTest {
         );
 
         // when
-        CommentResponseDto result = commentService.update(companyId, request);
+        CommentResponseDto result = commentService.update(companyId, request, null);
 
         // then
         assertThat(result).isNotNull();
@@ -148,7 +148,7 @@ class CommentServiceTest {
         );
 
         // when
-        Executable result = () -> commentService.update(companyId, request);
+        Executable result = () -> commentService.update(companyId, request, member);
 
         // then
         assertThrows(JobException.class, result);
@@ -178,7 +178,7 @@ class CommentServiceTest {
         );
 
         // when
-        Executable result = () -> commentService.update(companyId, request);
+        Executable result = () -> commentService.update(companyId, request, null);
 
         // then
         assertThrows(JobException.class, result);
@@ -209,7 +209,7 @@ class CommentServiceTest {
         );
 
         // when
-        Executable result = () -> commentService.update(companyId, request);
+        Executable result = () -> commentService.update(companyId, request, otherMember);
 
         // then
         assertThrows(JobException.class, result);
@@ -235,7 +235,7 @@ class CommentServiceTest {
         );
 
         // when
-        CodeResponseDto result = commentService.deleteById(companyId);
+        CodeResponseDto result = commentService.deleteById(companyId, member);
 
         // then
         assertThat(result).isNotNull();
@@ -261,7 +261,7 @@ class CommentServiceTest {
         );
 
         // when
-        Executable result = () -> commentService.deleteById(companyId);
+        Executable result = () -> commentService.deleteById(companyId, null);
 
         // then
         assertThrows(JobException.class, result);
@@ -288,7 +288,7 @@ class CommentServiceTest {
         );
 
         // when
-        Executable result = () -> commentService.deleteById(companyId);
+        Executable result = () -> commentService.deleteById(companyId, otherMember);
 
         // then
         assertThrows(JobException.class, result);

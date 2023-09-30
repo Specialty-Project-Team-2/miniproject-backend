@@ -41,7 +41,7 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentResponseDto update(Long commentId, CommentUpdateRequestDto request) {
+    public CommentResponseDto update(Long commentId, CommentUpdateRequestDto request, Member principal) {
         Comment entity = findById(commentId);
 
         isThisYours(entity.getMember());
@@ -51,7 +51,7 @@ public class CommentService {
     }
 
     @Transactional
-    public CodeResponseDto deleteById(Long commentId) {
+    public CodeResponseDto deleteById(Long commentId, Member principal) {
         Comment entity = findById(commentId);
 
         isThisYours(entity.getMember());

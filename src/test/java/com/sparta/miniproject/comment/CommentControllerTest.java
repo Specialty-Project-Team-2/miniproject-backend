@@ -85,7 +85,7 @@ class CommentControllerTest {
         String urlForTest = String.format("/api/comment/%s", id);
         CommentUpdateRequestDto request = new CommentUpdateRequestDto();
 
-        when(commentService.update(any(), any())).thenReturn(
+        when(commentService.update(any(), any(), any())).thenReturn(
                 CommentResponseDto.builder()
                         .comment("mock comment1")
                         .nickname("mock nickname1")
@@ -112,7 +112,7 @@ class CommentControllerTest {
         Long id = 1L;
         String urlForTest = String.format("/api/comment/%s", id);
 
-        when(commentService.deleteById(any())).thenReturn(
+        when(commentService.deleteById(any(), any())).thenReturn(
                 CodeResponseDto.builder()
                         .msg("테스트를 위한 문장")
                         .build()

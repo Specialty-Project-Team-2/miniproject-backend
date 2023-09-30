@@ -1,11 +1,10 @@
 package com.sparta.miniproject.service;
 
 import com.sparta.miniproject.dto.*;
-import com.sparta.miniproject.exception.JobException;
-import com.sparta.miniproject.utils.JwtUtil;
-import com.sparta.miniproject.utils.SecurityUtil;
 import com.sparta.miniproject.entity.Member;
+import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.repository.MemberRepository;
+import com.sparta.miniproject.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,11 +17,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
-
     private final MemberRepository memberRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final JwtUtil jwtUtil;
 
     @Transactional
@@ -87,10 +83,7 @@ public class MemberService {
     }
 
     @Transactional
-    public MypageResponsDto mypageUpdate(MemberRequestDto memberRequestDto) {
-        Optional<Member> optionalMember = SecurityUtil.getMemberLoggedIn();
-        Member memberLoggedIn = optionalMember.get();
-
+    public MypageResponsDto mypageUpdate(MemberRequestDto memberRequestDto, Member memberLoggedIn) {
         memberLoggedIn.update(memberRequestDto, passwordEncoder);
         memberRepository.save(memberLoggedIn);
         return new MypageResponsDto(memberLoggedIn);
