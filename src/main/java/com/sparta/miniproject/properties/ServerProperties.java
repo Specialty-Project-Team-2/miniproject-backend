@@ -1,4 +1,4 @@
-package com.sparta.miniproject.config;
+package com.sparta.miniproject.properties;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

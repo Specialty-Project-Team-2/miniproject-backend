@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.miniproject.utils.JwtUtil;
-import com.sparta.miniproject.config.KakaoOAuth2Properties;
+import com.sparta.miniproject.properties.KakaoOAuth2Properties;
 import com.sparta.miniproject.dto.KakaoUserInfoDto;
 import com.sparta.miniproject.entity.Member;
 import com.sparta.miniproject.repository.MemberRepository;
