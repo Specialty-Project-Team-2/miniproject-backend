@@ -98,7 +98,7 @@ class CompanyControllerTest {
         String urlForTest = "/api/company";
 
         when(companyService.readAll(any(), any())).thenReturn(
-                new PageImpl<>(CompanyFixture.caseList1())
+                new PageImpl<>(CompanyFixture.caseList())
                         .map(CompanyCardResponseDto::fromEntity)
         );
 
@@ -119,7 +119,7 @@ class CompanyControllerTest {
         String urlForTest = "/api/company";
 
         when(companyService.readAll(any(), any())).thenReturn(
-                new PageImpl<>(CompanyFixture.caseList1())
+                new PageImpl<>(CompanyFixture.caseList())
                         .map(CompanyCardResponseDto::fromEntity)
         );
 

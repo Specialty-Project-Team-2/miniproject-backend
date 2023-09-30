@@ -23,7 +23,7 @@ public class CompanyFixture {
         return entity;
     }
 
-    public static List<Company> caseList1() {
+    public static List<Company> caseList() {
         return List.of(caseWhichRegisteredAtFirst(), caseWhichRegisteredAtSecond());
     }
 }

@@ -25,7 +25,7 @@ public class CommentFixture {
         return entity;
     }
 
-    public static List<Comment> caseList1() {
+    public static List<Comment> caseList() {
         Company company1 = CompanyFixture.caseWhichRegisteredAtFirst();
         Company company2 = CompanyFixture.caseWhichRegisteredAtSecond();
         Member member1 = MemberFixture.caseWhoLoggedIn();

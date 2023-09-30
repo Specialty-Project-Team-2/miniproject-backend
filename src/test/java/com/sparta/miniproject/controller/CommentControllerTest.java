@@ -132,7 +132,7 @@ class CommentControllerTest {
         String urlForTest = "/api/comment";
 
         when(commentService.readAll()).thenReturn(
-                CommentFixture.caseList1().stream()
+                CommentFixture.caseList().stream()
                         .map(CommentResponseDto::fromEntity)
                         .toList()
         );
@@ -156,7 +156,7 @@ class CommentControllerTest {
         String urlForTest = "/api/company/1/comment";
 
         when(commentService.readAllByCompanyId(any(), any())).thenReturn(
-                new PageImpl<>(CommentFixture.caseList1())
+                new PageImpl<>(CommentFixture.caseList())
                         .map(CommentResponseDto::fromEntity)
         );
 
