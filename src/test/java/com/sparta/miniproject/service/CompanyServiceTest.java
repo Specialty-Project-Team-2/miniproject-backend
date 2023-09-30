@@ -4,7 +4,6 @@ import com.sparta.miniproject.dto.response.CompanyResponseDto;
 import com.sparta.miniproject.exception.JobException;
 import com.sparta.miniproject.fixture.CompanyFixture;
 import com.sparta.miniproject.repository.CompanyRepository;
-import com.sparta.miniproject.service.CompanyService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.function.Executable;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

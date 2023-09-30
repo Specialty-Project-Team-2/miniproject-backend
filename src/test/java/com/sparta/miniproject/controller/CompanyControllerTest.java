@@ -1,6 +1,5 @@
 package com.sparta.miniproject.controller;
 
-import com.sparta.miniproject.controller.CompanyController;
 import com.sparta.miniproject.dto.response.CompanyCardResponseDto;
 import com.sparta.miniproject.dto.response.CompanyResponseDto;
 import com.sparta.miniproject.exception.JobException;

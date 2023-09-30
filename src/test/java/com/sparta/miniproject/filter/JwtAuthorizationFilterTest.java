@@ -1,6 +1,5 @@
 package com.sparta.miniproject.filter;
 
-import com.sparta.miniproject.filter.JwtAuthorizationFilter;
 import com.sparta.miniproject.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
