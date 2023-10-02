@@ -65,7 +65,7 @@ Mine Sweeper는 **기업들에 대한 정보를 얻고**
     
   ---
 
-- `**Profile에 따른 설정 값 적용**`
+- **`Profile에 따른 설정 값 적용`**
 
   ![Untitled](%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20-%20Mine%20Sweeper%205aaa881233db40bd9201acc6f33415a9/Untitled%207.png)
 
